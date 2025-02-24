@@ -5,6 +5,7 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import { inject } from "vue";
 import Create from "./Components/Create.vue";
 import List from "./Components/List.vue";
 
@@ -15,16 +16,18 @@ const props = defineProps({
     },
 });
 
+const route = inject("route");
+
 const contentList = [
     {
         title: "상품 관리",
-        url: "/admin/product/manage",
+        url: route("admin.product.manage.index"),
         comp: List,
         data: props.products,
     },
     {
         title: "상품 등록",
-        url: "/admin/product/create",
+        url: route("admin.product.create"),
         comp: Create,
     },
 ];

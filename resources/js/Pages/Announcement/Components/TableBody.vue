@@ -50,8 +50,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.data);
-
 const route = inject("route");
 
 const confirmModalStore = useConfirmModalStore();
@@ -63,9 +61,9 @@ const onDelete = (id) => {
     confirmModalStore.init({
         text: "삭제하시겠습니까?",
         func: () => {
-            router.delete(route("admin.announcement.delete", id), {
+            router.delete(route("admin.announcement.destroy", id), {
                 onSuccess: () => {
-                    router.visit(route("announcement"));
+                    router.visit(route("announcement.index"));
                 },
             });
         },
@@ -77,4 +75,6 @@ const onDelete = (id) => {
 const onItemClick = (id) => {
     router.visit(route("announcement.show", id));
 };
+
+const onEdit = (id) => {};
 </script>

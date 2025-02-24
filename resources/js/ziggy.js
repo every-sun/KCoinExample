@@ -8,20 +8,20 @@ const Ziggy = {
             uri: "admin/product/create",
             methods: ["GET", "HEAD"],
         },
-        "admin.product.manage": {
+        "admin.product.manage.index": {
             uri: "admin/product/manage",
             methods: ["GET", "HEAD"],
         },
-        "admin.product.store": {
-            uri: "admin/product/create",
-            methods: ["POST"],
-        },
-        "user.coin.manage": {
+        "admin.product.store": { uri: "admin/product", methods: ["POST"] },
+        "user.coin.manage.index": {
             uri: "user/k-coin/manage",
             methods: ["GET", "HEAD"],
         },
-        "user.coin.use": { uri: "user/k-coin/use", methods: ["GET", "HEAD"] },
-        "admin.coin.manage": {
+        "user.coin.use.index": {
+            uri: "user/k-coin/use",
+            methods: ["GET", "HEAD"],
+        },
+        "admin.coin.manage.index": {
             uri: "admin/k-coin/manage",
             methods: ["GET", "HEAD"],
         },
@@ -29,17 +29,27 @@ const Ziggy = {
             uri: "admin/announcement/create",
             methods: ["GET", "HEAD"],
         },
-        "admin.announcement.delete": {
-            uri: "admin/announcement/delete/{id}",
+        "admin.announcement.destroy": {
+            uri: "admin/announcement/{id}",
             methods: ["DELETE"],
             parameters: ["id"],
         },
         "admin.announcement.store": {
-            uri: "admin/announcement/create",
+            uri: "admin/announcement",
             methods: ["POST"],
         },
-        inquiry: { uri: "inquiry", methods: ["GET", "HEAD"] },
-        announcement: { uri: "announcement", methods: ["GET", "HEAD"] },
+        "announcement.edit": {
+            uri: "admin/announcement/{id}",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
+        "announcement.update": {
+            uri: "admin/announcement/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
+        "inquiry.index": { uri: "inquiry", methods: ["GET", "HEAD"] },
+        "announcement.index": { uri: "announcement", methods: ["GET", "HEAD"] },
         "announcement.show": {
             uri: "announcement/{id}",
             methods: ["GET", "HEAD"],

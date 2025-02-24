@@ -39,7 +39,7 @@
 </template>
 <script setup>
 import ConfirmModal from "@components/Modal/ConfirmModal.vue";
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import Header from "./Header.vue";
 import Menus from "./Menus.vue";
@@ -52,8 +52,7 @@ const props = defineProps({
     },
 });
 
-const { url } = usePage();
-
+const url = window.location.href;
 const current = computed(() => {
     const result = props.childList.find((e) => url === e.url);
     if (result) {

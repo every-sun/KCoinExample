@@ -5,12 +5,14 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import { inject } from "vue";
 import Content from "./Components/Content.vue";
 
+const route = inject("route");
 const contentList = [
     {
         title: "K-Coin 관리",
-        url: "/admin/k-coin/manage",
+        url: route("admin.coin.manage.index"),
         comp: Content,
     },
 ];

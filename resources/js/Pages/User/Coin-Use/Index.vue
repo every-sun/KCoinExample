@@ -5,6 +5,7 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import { inject } from "vue";
 import Content from "./Components/Content.vue";
 
 const props = defineProps({
@@ -14,10 +15,12 @@ const props = defineProps({
     },
 });
 
+const route = inject("route");
+
 const contentList = [
     {
         title: "K-Coin 사용",
-        url: "/user/k-coin/use",
+        url: route("user.coin.use.index"),
         comp: Content,
         data: {
             products: props.products,
