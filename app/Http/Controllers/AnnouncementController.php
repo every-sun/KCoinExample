@@ -14,4 +14,9 @@ class AnnouncementController extends Controller
             'announcements'=>$announcements
         ]);
     }
+
+    public function destroy($id){
+        $item = Announcement::destroy($id);
+        return;
+    }
 }

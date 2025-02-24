@@ -24,5 +24,6 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
+        return;
     }
 }

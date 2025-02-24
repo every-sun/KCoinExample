@@ -18,7 +18,11 @@
                 <OutlineButton
                     title="삭제"
                     class="px-2 text-sm"
-                    :onClick="onDelete"
+                    :onClick="
+                        () => {
+                            onDelete(item.id);
+                        }
+                    "
                 />
                 <OutlineButton title="수정" class="px-2 text-sm" />
             </td>
@@ -27,8 +31,10 @@
 </template>
 <script setup>
 import OutlineButton from "@components/Button/OutlineButton.vue";
+import { router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useConverter } from "@utils/useConverter";
+import { inject } from "vue";
 
 const props = defineProps({
     data: {
@@ -37,16 +43,22 @@ const props = defineProps({
     },
 });
 
+const route = inject("route");
+
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();
 
 const isAdmin = true;
 
-const onDelete = () => {
+const onDelete = (id) => {
     confirmModalStore.init({
         text: "삭제하시겠습니까?",
         func: () => {
-            console.log("삭제");
+            router.delete(route("announcement.delete", id), {
+                onSuccess: () => {
+                    router.visit(route("announcement"));
+                },
+            });
         },
         agreeText: "삭제",
     });

@@ -4,6 +4,10 @@ const Ziggy = {
     defaults: {},
     routes: {
         home: { uri: "/", methods: ["GET", "HEAD"] },
+        "admin.product.create": {
+            uri: "admin/product/create",
+            methods: ["GET", "HEAD"],
+        },
         "admin.product.manage": {
             uri: "admin/product/manage",
             methods: ["GET", "HEAD"],
@@ -11,6 +15,22 @@ const Ziggy = {
         "admin.product.store": {
             uri: "admin/product/create",
             methods: ["POST"],
+        },
+        "user.coin.manage": {
+            uri: "user/k-coin/manage",
+            methods: ["GET", "HEAD"],
+        },
+        "user.coin.use": { uri: "user/k-coin/use", methods: ["GET", "HEAD"] },
+        "admin.coin.manage": {
+            uri: "admin/k-coin/manage",
+            methods: ["GET", "HEAD"],
+        },
+        inquiry: { uri: "inquiry", methods: ["GET", "HEAD"] },
+        announcement: { uri: "announcement", methods: ["GET", "HEAD"] },
+        "announcement.delete": {
+            uri: "announcement/delete/{id}",
+            methods: ["DELETE"],
+            parameters: ["id"],
         },
         "storage.local": {
             uri: "storage/{path}",
