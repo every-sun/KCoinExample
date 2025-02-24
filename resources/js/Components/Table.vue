@@ -21,6 +21,6 @@
 const props = defineProps({
     headers: Array,
     tbodyComp: Object,
-    data: Array,
+    data: Object,
 });
 </script>

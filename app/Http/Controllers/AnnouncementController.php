@@ -26,6 +26,14 @@ class AnnouncementController extends Controller
         return Inertia::render('Announcement/Index');
     }
 
+    public function edit($id){
+        // 수정 페이지로 이동
+    }
+
+    public function update($id){
+        // 아이템 업데이트
+    }
+
     public function destroy($id){
         $item = Announcement::destroy($id);
         return;

@@ -66,7 +66,7 @@ const form = useForm({
 const onSubmit = () => {
     form.post(route("admin.product.store"), {
         onSuccess: () => {
-            router.visit(route("admin.product.manage"));
+            router.visit(route("admin.product.manage.index"));
         },
     });
 };

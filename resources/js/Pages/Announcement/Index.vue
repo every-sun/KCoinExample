@@ -5,6 +5,7 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import { inject } from "vue";
 import Create from "../Admin/Announcement/Components/Create.vue";
 import List from "./Components/List.vue";
 import Show from "./Components/Show.vue";
@@ -18,23 +19,24 @@ const props = defineProps({
         requried: true,
     },
 });
+const route = inject("route");
 const contentList = [
     props.announcement
         ? {
               title: "공지사항",
-              url: `/announcement/${props.announcement.id}`,
+              url: route("announcement.show", props.announcement.id),
               comp: Show,
               data: props.announcement,
           }
         : {
               title: "공지사항",
-              url: "/announcement",
+              url: route("announcement.index"),
               comp: List,
               data: props.announcements,
           },
     {
         title: "공지사항 등록",
-        url: "/admin/announcement/create",
+        url: route("admin.announcement.create"),
         comp: Create,
     },
 ];
