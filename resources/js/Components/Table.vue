@@ -13,7 +13,7 @@
                     </th>
                 </tr>
             </thead>
-            <component :is="tbodyComp" />
+            <component :is="tbodyComp" :data="data" />
         </table>
     </div>
 </template>
@@ -21,5 +21,6 @@
 const props = defineProps({
     headers: Array,
     tbodyComp: Object,
+    data: Array,
 });
 </script>

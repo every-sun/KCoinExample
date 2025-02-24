@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import FillButton from "@components/FillButton.vue";
+import FillButton from "@components/Button/FillButton.vue";
 import { router, useForm } from "@inertiajs/vue3";
 import { inject } from "vue";
 

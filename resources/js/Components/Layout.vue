@@ -4,8 +4,8 @@
         :class="[
             'fixed top-0 left-0 transition-all duration-[0.4s] w-full h-[100vh]',
             isHamburgerOn
-                ? 'opacity-75 pointer-events-auto bg-gray-500'
-                : 'opacity-0 pointer-events-none bg-transparent',
+                ? 'pointer-events-auto bg-gray-500/75'
+                : 'pointer-events-none bg-transparent',
         ]"
         @click="toggleHamburger(false)"
     ></div>

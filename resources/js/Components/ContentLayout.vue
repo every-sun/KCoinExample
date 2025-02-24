@@ -19,7 +19,7 @@
                         :key="item.title"
                         :class="[
                             'border-b-4 cursor-pointer py-2',
-                            url.includes(item.url)
+                            current.url === item.url
                                 ? 'border-b-secondary text-secondary'
                                 : 'border-b-transparent',
                         ]"
@@ -35,8 +35,10 @@
             ></component>
         </div>
     </div>
+    <ConfirmModal />
 </template>
 <script setup>
+import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import Header from "./Header.vue";
@@ -52,9 +54,14 @@ const props = defineProps({
 
 const { url } = usePage();
 
-const current = computed(() =>
-    props.childList.find((e) => url.includes(e.url))
-);
+const current = computed(() => {
+    const result = props.childList.find((e) => url === e.url);
+    if (result) {
+        return result;
+    } else {
+        return props.childList.find((e) => url.includes(e.url));
+    }
+});
 
 const isHamburgerOn = ref(false);
 

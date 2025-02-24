@@ -55,5 +55,5 @@
     </tbody>
 </template>
 <script setup>
-import OutlineButton from "@components/OutlineButton.vue";
+import OutlineButton from "@components/Button/OutlineButton.vue";
 </script>

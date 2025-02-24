@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function adminIndex(){  // 상품 관리 (관리자)
         $products = Product::orderByDesc('created_at')->paginate(20);
         return Inertia::render('Admin/Product/Index', [
-            'data' => $products
+            'products' => $products
         ]);
     }
 
@@ -24,5 +24,6 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
+        return;
     }
 }

@@ -64,33 +64,18 @@
                 />
             </div>
         </div>
-
-        <div class="flex gap-3 mt-10 justify-center">
-            <Link
-                v-for="(item, i) in data.products.links"
-                :href="item.url || '#'"
-                :class="[
-                    ' px-1 rounded-md hover:bg-gray-100',
-                    data.products.current_page === i
-                        ? `ring-2 ring-secondary text-button`
-                        : 'ring-1 ring-gray-500',
-                ]"
-            >
-                <p v-if="i === 0">이전</p>
-                <p v-else-if="i === data.products.links.length - 1">다음</p>
-                <p v-else>
-                    {{ item.label }}
-                </p>
-            </Link>
-        </div>
+        <PageController
+            :links="data.products.links"
+            :currentPage="data.products.current_page"
+        />
     </div>
 </template>
 <script setup>
+import FillButton from "@components/Button/FillButton.vue";
 import DropDown from "@components/DropDown.vue";
-import FillButton from "@components/FillButton.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
-import { Link } from "@inertiajs/vue3";
+import PageController from "@components/PageController.vue";
 import { ref } from "vue";
 
 const props = defineProps({

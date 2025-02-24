@@ -1,8 +1,11 @@
 import { createInertiaApp } from "@inertiajs/vue3";
+import { createPinia } from "pinia";
 import { createApp, h } from "vue";
 import { ZiggyVue } from "ziggy-js";
 import "../css/app.css";
 import { Ziggy } from "./ziggy.js";
+
+const pinia = createPinia();
 
 createInertiaApp({
     resolve: (name) => {
@@ -12,6 +15,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(pinia)
             .use(ZiggyVue, Ziggy)
             .mount(el);
     },
