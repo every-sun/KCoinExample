@@ -35,8 +35,10 @@
             ></component>
         </div>
     </div>
+    <ConfirmModal />
 </template>
 <script setup>
+import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import Header from "./Header.vue";

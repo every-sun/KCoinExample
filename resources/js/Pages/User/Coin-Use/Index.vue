@@ -14,7 +14,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.products);
 const contentList = [
     {
         title: "K-Coin 사용",
