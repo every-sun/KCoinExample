@@ -9,7 +9,7 @@ use App\Models\Announcement;
 class AnnouncementController extends Controller
 {
     public function index(){
-        $announcements= Announcement::orderByDesc('created_at')->paginate(10); 
+        $announcements= Announcement::orderByDesc('created_at')->paginate(20); 
         return Inertia::render('Announcement/Index', [
             'announcements'=> $announcements
         ]);
@@ -37,6 +37,8 @@ class AnnouncementController extends Controller
             'content'=>['required'],
         ]);
         $item = Announcement::create($request->all());
-        return;
+        return Inertia::render('Announcement/Index', [
+            'item'=> $item
+        ]);
     }
 }

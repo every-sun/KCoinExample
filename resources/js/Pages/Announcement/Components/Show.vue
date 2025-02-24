@@ -19,7 +19,7 @@ const props = defineProps({
         requried: true,
     },
 });
-
+console.log(props.data);
 const onPrev = () => {
     window.history.back();
 };

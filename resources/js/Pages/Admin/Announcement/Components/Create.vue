@@ -44,7 +44,9 @@ const form = useForm({
 const onSubmit = () => {
     form.post(route("admin.announcement.store"), {
         onSuccess: (res) => {
-            router.visit(route("announcement"));
+            router.visit(route("announcement.show", res.props.item.id), {
+                replace: true,
+            });
         },
     });
 };

@@ -8,7 +8,6 @@ import ContentLayout from "@components/ContentLayout.vue";
 import Create from "../Admin/Announcement/Components/Create.vue";
 import List from "./Components/List.vue";
 import Show from "./Components/Show.vue";
-
 const props = defineProps({
     announcements: {
         type: Object,
