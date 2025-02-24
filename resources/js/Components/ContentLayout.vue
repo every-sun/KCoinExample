@@ -55,10 +55,11 @@ const props = defineProps({
 const { url } = usePage();
 
 const current = computed(() => {
-    if (url.includes("page=")) {
-        return props.childList.find((e) => url.includes(e.url));
+    const result = props.childList.find((e) => url === e.url);
+    if (result) {
+        return result;
     } else {
-        return props.childList.find((e) => url === e.url);
+        return props.childList.find((e) => url.includes(e.url));
     }
 });
 

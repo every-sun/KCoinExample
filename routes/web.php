@@ -33,4 +33,7 @@ Route::prefix('/admin/announcement')->group(function(){
 });
 
 Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry');
-Route::get('/announcement', [AnnouncementController::class, 'index'])->name('announcement');
+Route::prefix('/announcement')->group(function(){
+    Route::get('/', [AnnouncementController::class, 'index'])->name('announcement');
+    Route::get('/{id}', [AnnouncementController::class, 'show'])->name('announcement.show');
+});

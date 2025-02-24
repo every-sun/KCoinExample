@@ -11,7 +11,14 @@ class AnnouncementController extends Controller
     public function index(){
         $announcements= Announcement::orderByDesc('created_at')->paginate(10); 
         return Inertia::render('Announcement/Index', [
-            'announcements'=>$announcements
+            'announcements'=> $announcements
+        ]);
+    }
+
+    public function show($id){
+        $announcement = Announcement::find($id); 
+        return Inertia::render('Announcement/Index', [
+            'announcement'=> $announcement
         ]);
     }
 

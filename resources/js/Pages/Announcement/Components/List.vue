@@ -32,11 +32,7 @@
                 </div>
             </div>
         </div>
-        <Table
-            :tbodyComp="TableBody"
-            :headers="headers"
-            :data="data.data"
-        ></Table>
+        <Table :tbodyComp="TableBody" :headers="headers" :data="data"></Table>
         <PageController
             :links="data.links"
             :currentPage="data.current_page"

@@ -2,11 +2,18 @@
     <tbody>
         <tr
             class="bg-white border-b border-gray-100 text-sm"
-            v-for="(item, i) in data"
+            v-for="(item, i) in data.data"
             :key="item.id"
         >
-            <td class="px-2 py-1">{{ i + 1 }}</td>
-            <td class="px-2 py-1">{{ item.title }}</td>
+            <td class="px-2 py-1">
+                {{ (data.current_page - 1) * data.per_page + i + 1 }}
+            </td>
+            <td
+                class="px-2 py-1 hover:underline cursor-pointer"
+                @click="onItemClick(item.id)"
+            >
+                {{ item.title }}
+            </td>
             <td class="px-2 py-1 whitespace-nowrap">
                 {{ timestampToDate(item.created_at) }}
             </td>
@@ -38,10 +45,12 @@ import { inject } from "vue";
 
 const props = defineProps({
     data: {
-        type: Array,
+        type: Object,
         required: true,
     },
 });
+
+console.log(props.data);
 
 const route = inject("route");
 
@@ -63,5 +72,9 @@ const onDelete = (id) => {
         agreeText: "삭제",
     });
     confirmModalStore.open();
+};
+
+const onItemClick = (id) => {
+    router.visit(route("announcement.show", id));
 };
 </script>

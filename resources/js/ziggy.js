@@ -40,6 +40,11 @@ const Ziggy = {
         },
         inquiry: { uri: "inquiry", methods: ["GET", "HEAD"] },
         announcement: { uri: "announcement", methods: ["GET", "HEAD"] },
+        "announcement.show": {
+            uri: "announcement/{id}",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
         "storage.local": {
             uri: "storage/{path}",
             methods: ["GET", "HEAD"],
