@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Announcement extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['title','content',];
+    protected $attributes = [
+// TODO USER ID
+        'user_id' => 1,
+    ];
 }

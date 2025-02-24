@@ -12,6 +12,20 @@
                 <FilterInput />
             </div>
             <div class="flex gap-2 items-center">
+                <p class="text-xs w-28">등록일</p>
+                <div class="w-96 flex gap-2 items-center">
+                    <input
+                        type="date"
+                        class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
+                    />
+                    ~
+                    <input
+                        type="date"
+                        class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
+                    />
+                </div>
+            </div>
+            <div class="flex gap-2 items-center">
                 <div class="flex-1 flex items-center justify-between">
                     <div class="w-96 flex gap-2 items-center"></div>
                     <FillButton title="검색" class="text-xs px-8 py-1" />
@@ -37,16 +51,16 @@ import PageController from "@components/PageController.vue";
 import Table from "@components/Table.vue";
 import TableBody from "./TableBody.vue";
 
-const isAdmin = true;
-
-const headers = isAdmin
-    ? ["No", "제목", "등록일", "작성자", "", ""]
-    : ["No", "제목", "등록일", "작성자"];
-
 const props = defineProps({
     data: {
         type: Object,
         requried: true,
     },
 });
+
+const isAdmin = true;
+
+const headers = isAdmin
+    ? ["No", "제목", "등록일", "작성자", "", ""]
+    : ["No", "제목", "등록일", "작성자"];
 </script>

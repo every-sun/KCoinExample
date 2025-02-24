@@ -54,7 +54,7 @@ const onDelete = (id) => {
     confirmModalStore.init({
         text: "삭제하시겠습니까?",
         func: () => {
-            router.delete(route("announcement.delete", id), {
+            router.delete(route("admin.announcement.delete", id), {
                 onSuccess: () => {
                     router.visit(route("announcement"));
                 },

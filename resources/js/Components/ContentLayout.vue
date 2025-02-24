@@ -19,7 +19,7 @@
                         :key="item.title"
                         :class="[
                             'border-b-4 cursor-pointer py-2',
-                            url.includes(item.url)
+                            current.url === item.url
                                 ? 'border-b-secondary text-secondary'
                                 : 'border-b-transparent',
                         ]"
@@ -54,9 +54,13 @@ const props = defineProps({
 
 const { url } = usePage();
 
-const current = computed(() =>
-    props.childList.find((e) => url.includes(e.url))
-);
+const current = computed(() => {
+    if (url.includes("page=")) {
+        return props.childList.find((e) => url.includes(e.url));
+    } else {
+        return props.childList.find((e) => url === e.url);
+    }
+});
 
 const isHamburgerOn = ref(false);
 

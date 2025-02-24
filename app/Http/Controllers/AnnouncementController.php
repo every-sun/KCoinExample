@@ -15,8 +15,21 @@ class AnnouncementController extends Controller
         ]);
     }
 
+    public function create(){
+        return Inertia::render('Announcement/Index');
+    }
+
     public function destroy($id){
         $item = Announcement::destroy($id);
+        return;
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            'title' => ['required'],
+            'content'=>['required'],
+        ]);
+        $item = Announcement::create($request->all());
         return;
     }
 }

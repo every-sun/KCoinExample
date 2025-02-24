@@ -25,13 +25,21 @@ const Ziggy = {
             uri: "admin/k-coin/manage",
             methods: ["GET", "HEAD"],
         },
-        inquiry: { uri: "inquiry", methods: ["GET", "HEAD"] },
-        announcement: { uri: "announcement", methods: ["GET", "HEAD"] },
-        "announcement.delete": {
-            uri: "announcement/delete/{id}",
+        "admin.announcement.create": {
+            uri: "admin/announcement/create",
+            methods: ["GET", "HEAD"],
+        },
+        "admin.announcement.delete": {
+            uri: "admin/announcement/delete/{id}",
             methods: ["DELETE"],
             parameters: ["id"],
         },
+        "admin.announcement.store": {
+            uri: "admin/announcement/create",
+            methods: ["POST"],
+        },
+        inquiry: { uri: "inquiry", methods: ["GET", "HEAD"] },
+        announcement: { uri: "announcement", methods: ["GET", "HEAD"] },
         "storage.local": {
             uri: "storage/{path}",
             methods: ["GET", "HEAD"],
