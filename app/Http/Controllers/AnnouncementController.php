@@ -40,14 +40,10 @@ class AnnouncementController extends Controller
         ]);
         $item = Announcement::findOrFail($id); 
         $item->update($request->all());
-        // return Inertia::render('Announcement/Show', [
-        //     'id'=> $item->id
-        // ]);
     }
 
     public function destroy($id){
         $item = Announcement::destroy($id);
-        return;
     }
 
     public function store(Request $request){
@@ -56,8 +52,5 @@ class AnnouncementController extends Controller
             'content'=>['required'],
         ]);
         $item = Announcement::create($request->all());
-        // return  Inertia::render('Announcement/Index', [
-        //     'id'=> $item->id
-        // ]);
     }
 }

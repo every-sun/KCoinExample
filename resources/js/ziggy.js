@@ -46,6 +46,28 @@ const Ziggy = {
             parameters: ["id"],
         },
         "inquiry.index": { uri: "inquiry", methods: ["GET", "HEAD"] },
+        "inquiry.create": { uri: "inquiry/create", methods: ["GET", "HEAD"] },
+        "inquiry.edit": {
+            uri: "inquiry/{id}/edit",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
+        "inquiry.show": {
+            uri: "inquiry/{id}",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
+        "inquiry.store": { uri: "inquiry", methods: ["POST"] },
+        "inquiry.update": {
+            uri: "inquiry/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
+        "inquiry.destroy": {
+            uri: "inquiry/{id}",
+            methods: ["DELETE"],
+            parameters: ["id"],
+        },
         "announcement.index": { uri: "announcement", methods: ["GET", "HEAD"] },
         "announcement.show": {
             uri: "announcement/{id}",

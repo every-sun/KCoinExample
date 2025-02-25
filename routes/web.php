@@ -34,7 +34,15 @@ Route::prefix('/admin/announcement')->group(function(){
     Route::delete('/{id}', [AnnouncementController::class, 'destroy'])->name('admin.announcement.destroy');
 });
 
-Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry.index');
+Route::prefix('/inquiry')->group(function(){   
+    Route::get('/', [InquiryController::class, 'index'])->name('inquiry.index');
+    Route::get('/create', [InquiryController::class, 'create'])->name('inquiry.create');
+    Route::get('/{id}/edit', [InquiryController::class, 'edit'])->name('inquiry.edit');
+    Route::get('/{id}', [InquiryController::class, 'show'])->name('inquiry.show');
+    Route::post('/', [InquiryController::class, 'store'])->name('inquiry.store');
+    Route::put('/{id}', [InquiryController::class, 'update'])->name('inquiry.update'); 
+    Route::delete('/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
+});
 
 Route::prefix('/announcement')->group(function(){
     Route::get('/', [AnnouncementController::class, 'index'])->name('announcement.index');

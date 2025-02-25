@@ -5,11 +5,11 @@
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
             >
                 <div class="flex gap-2 items-center">
-                    <label for="name" class="text-xs w-28">제목</label>
+                    <label class="text-xs w-28">제목</label>
                     <FilterInput />
                 </div>
                 <div class="flex gap-2 items-center">
-                    <label for="name" class="text-xs w-28">내용</label>
+                    <label class="text-xs w-28">내용</label>
                     <FilterInput />
                 </div>
                 <div class="flex gap-2 items-center">

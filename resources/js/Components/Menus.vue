@@ -28,7 +28,11 @@ const menus = [
         role: "user",
         url: [route("user.coin.manage.index")],
     },
-    { label: "문의 게시판", role: "user", url: [route("inquiry.index")] },
+    {
+        label: "문의 게시판",
+        role: "user",
+        url: [route("inquiry.index"), route("inquiry.create")],
+    },
     {
         label: "공지사항",
         role: "user",
