@@ -17,7 +17,7 @@
                     {{ item.value }}
                 </span>
             </p>
-            <OutlineButton
+            <WhiteButton
                 title="상세 코인 적립 내역 확인하기 >"
                 class="text-xs py-1"
             />
@@ -25,7 +25,7 @@
     </div>
 </template>
 <script setup>
-import OutlineButton from "@components/Button/OutlineButton.vue";
+import WhiteButton from "@components/Button/WhiteButton.vue";
 const props = defineProps({
     data: {
         type: Object,

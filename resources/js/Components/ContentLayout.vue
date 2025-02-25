@@ -7,19 +7,21 @@
             <UserInfo :data="dummyData" />
             <Menus />
         </div>
-        <div class="w-[85%]">
+        <div class="w-[85%] 0">
             <div
                 class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300"
             >
-                <p class="font-semibold text-2xl mb-4">{{ current.title }}</p>
+                <p class="font-semibold text-2xl mb-4">
+                    {{ current?.title }}
+                </p>
                 <div class="flex gap-8">
                     <Link
-                        v-for="(item, i) in childList"
+                        v-for="(item, i) in tabs"
                         :href="item.url"
                         :key="item.title"
                         :class="[
                             'border-b-4 cursor-pointer py-2',
-                            current.url === item.url
+                            current?.url === item.url
                                 ? 'border-b-secondary text-secondary'
                                 : 'border-b-transparent',
                         ]"
@@ -28,11 +30,7 @@
                     </Link>
                 </div>
             </div>
-            <component
-                :is="current.comp"
-                :data="current.data"
-                class="px-10 pt-5 pb-20"
-            ></component>
+            <div class="px-4 py-10"><slot></slot></div>
         </div>
     </div>
     <ConfirmModal />
@@ -40,26 +38,17 @@
 <script setup>
 import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { Link } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import Header from "./Header.vue";
 import Menus from "./Menus.vue";
 import UserInfo from "./UserInfo.vue";
 
 const props = defineProps({
-    childList: {
+    tabs: {
         type: Array,
         required: true,
     },
-});
-
-const url = window.location.href;
-const current = computed(() => {
-    const result = props.childList.find((e) => url === e.url);
-    if (result) {
-        return result;
-    } else {
-        return props.childList.find((e) => url.includes(e.url));
-    }
+    current: Object,
 });
 
 const isHamburgerOn = ref(false);

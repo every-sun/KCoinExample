@@ -12,8 +12,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('/admin/product')->group(function(){
-    Route::inertia('/create', 'Admin/Product/Index')->name('admin.product.create');
-    Route::get('/manage', [ProductController::class, 'adminIndex'])->name('admin.product.manage.index'); 
+    Route::inertia('/create', 'Admin/Product/Create')->name('admin.product.create');
+    Route::get('/', [ProductController::class, 'adminIndex'])->name('admin.product.index'); 
     Route::post('/', [ProductController::class, 'store'])->name('admin.product.store'); 
 });
 
@@ -23,21 +23,28 @@ Route::prefix('/user/k-coin')->group(function(){
 });
 
 Route::prefix('/admin/k-coin')->group(function(){
-    Route::get('/manage', [CoinController::class, 'adminManageIndex'])->name('admin.coin.manage.index'); 
+    Route::get('/', [CoinController::class, 'adminManageIndex'])->name('admin.coin.index'); 
 });
 
 Route::prefix('/admin/announcement')->group(function(){
     Route::get('/create', [AnnouncementController::class, 'create'])->name('admin.announcement.create');
-    Route::delete('/{id}', [AnnouncementController::class, 'destroy'])->name('admin.announcement.destroy');
+    Route::get('/{id}/edit', [AnnouncementController::class, 'edit'])->name('admin.announcement.edit');
     Route::post('/', [AnnouncementController::class, 'store'])->name('admin.announcement.store');
-    Route::get('/{id}', [AnnouncementController::class, 'edit'])->name('announcement.edit');
-    Route::put('/{id}', [AnnouncementController::class, 'update'])->name('announcement.update');
+    Route::put('/{id}', [AnnouncementController::class, 'update'])->name('admin.announcement.update');
+    Route::delete('/{id}', [AnnouncementController::class, 'destroy'])->name('admin.announcement.destroy');
 });
 
-Route::get('/inquiry', [InquiryController::class, 'index'])->name('inquiry.index');
+Route::prefix('/inquiry')->group(function(){   
+    Route::get('/', [InquiryController::class, 'index'])->name('inquiry.index');
+    Route::get('/create', [InquiryController::class, 'create'])->name('inquiry.create');
+    Route::get('/{id}/edit', [InquiryController::class, 'edit'])->name('inquiry.edit');
+    Route::get('/{id}', [InquiryController::class, 'show'])->name('inquiry.show');
+    Route::post('/', [InquiryController::class, 'store'])->name('inquiry.store');
+    Route::put('/{id}', [InquiryController::class, 'update'])->name('inquiry.update'); 
+    Route::delete('/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
+});
 
 Route::prefix('/announcement')->group(function(){
     Route::get('/', [AnnouncementController::class, 'index'])->name('announcement.index');
     Route::get('/{id}', [AnnouncementController::class, 'show'])->name('announcement.show');
-   
 });

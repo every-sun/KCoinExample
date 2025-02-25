@@ -10,7 +10,7 @@ class Announcement extends Model
     use HasFactory;
     protected $fillable = ['title','content',];
     protected $attributes = [
-// TODO USER ID
+    // TODO USER ID
         'user_id' => 1,
     ];
 }

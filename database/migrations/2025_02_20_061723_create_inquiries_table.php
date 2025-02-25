@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('content');
             $table->string('status');
+            $table->string('type');
             $table->string('answer')->nullable();
             $table->timestamp('answered_at')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
