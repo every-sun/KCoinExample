@@ -1,32 +1,35 @@
 <template>
-    <Header :toggleHamburger="toggleHamburger"></Header>
-    <div
-        :class="[
-            'fixed top-0 left-0 transition-all duration-[0.4s] w-full h-[100vh]',
-            isHamburgerOn
-                ? 'pointer-events-auto bg-gray-500/75'
-                : 'pointer-events-none bg-transparent',
-        ]"
-        @click="toggleHamburger(false)"
-    ></div>
-    <div
-        :class="[
-            'fixed top-0 h-[100vh] bg-primary w-52 px-6 transition-all duration-[0.4s] z-10',
-            isHamburgerOn
-                ? 'opacity-[100%] left-0'
-                : 'left-[-100%] opacity-[0%]',
-        ]"
-    >
-        <div class="w-full h-[80px] flex items-center">
-            <button
-                class="text-white cursor-pointer text-2xl"
-                @click="toggleHamburger(false)"
-            >
-                X
-            </button>
+    <div>
+        <Header :toggleHamburger="toggleHamburger"></Header>
+        <div
+            :class="[
+                'fixed top-0 left-0 transition-all duration-[0.4s] w-full h-[100vh]',
+                isHamburgerOn
+                    ? 'pointer-events-auto bg-gray-500/75'
+                    : 'pointer-events-none bg-transparent',
+            ]"
+            @click="toggleHamburger(false)"
+        ></div>
+        <div
+            :class="[
+                'fixed top-0 h-[100vh] bg-primary w-52 px-6 transition-all duration-[0.4s] z-10',
+                isHamburgerOn
+                    ? 'opacity-[100%] left-0'
+                    : 'left-[-100%] opacity-[0%]',
+            ]"
+        >
+            <div class="w-full h-[80px] flex items-center">
+                <button
+                    class="text-white cursor-pointer text-2xl"
+                    @click="toggleHamburger(false)"
+                >
+                    X
+                </button>
+            </div>
+            <UserInfo :data="dummyData" />
+            <Menus />
         </div>
-        <UserInfo :data="dummyData" />
-        <Menus />
+        <slot></slot>
     </div>
 </template>
 <script setup>

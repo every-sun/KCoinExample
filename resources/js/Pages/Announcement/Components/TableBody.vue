@@ -25,13 +25,17 @@
                 <OutlineButton
                     title="삭제"
                     class="px-2 text-sm"
-                    :onClick="
+                    @click="
                         () => {
                             onDelete(item.id);
                         }
                     "
                 />
-                <OutlineButton title="수정" class="px-2 text-sm" />
+                <OutlineButton
+                    title="수정"
+                    class="px-2 text-sm"
+                    @click="onEdit(item.id)"
+                />
             </td>
         </tr>
     </tbody>
@@ -76,5 +80,7 @@ const onItemClick = (id) => {
     router.visit(route("announcement.show", id));
 };
 
-const onEdit = (id) => {};
+const onEdit = (id) => {
+    router.visit(route("admin.announcement.edit", id));
+};
 </script>

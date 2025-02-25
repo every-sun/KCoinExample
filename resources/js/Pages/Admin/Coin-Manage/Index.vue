@@ -1,19 +1,18 @@
 <template>
-    <div class="w-full">
-        <ContentLayout :childList="contentList" />
-    </div>
+    <ContentLayout :tabs="tabs" :current="tabs[0]"
+        ><div>K코인 관리</div></ContentLayout
+    >
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
 import { inject } from "vue";
-import Content from "./Components/Content.vue";
 
 const route = inject("route");
-const contentList = [
+
+const tabs = [
     {
         title: "K-Coin 관리",
-        url: route("admin.coin.manage.index"),
-        comp: Content,
+        url: route("admin.coin.index"),
     },
 ];
 </script>

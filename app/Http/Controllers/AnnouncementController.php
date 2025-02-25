@@ -16,22 +16,33 @@ class AnnouncementController extends Controller
     }
 
     public function show($id){
-        $announcement = Announcement::find($id); 
-        return Inertia::render('Announcement/Index', [
-            'announcement'=> $announcement
+        $item = Announcement::findOrFail($id); 
+        return Inertia::render('Announcement/Show', [
+            'announcement'=> $item
         ]);
     }
 
     public function create(){
-        return Inertia::render('Announcement/Index');
+        return Inertia::render('Admin/Announcement/Create');
     }
 
     public function edit($id){
-        // 수정 페이지로 이동
+        $item = Announcement::findOrFail($id); 
+        return Inertia::render('Admin/Announcement/Create', [
+            'announcement'=> $item
+        ]);
     }
 
-    public function update($id){
-        // 아이템 업데이트
+    public function update($id, Request $request){
+        $request->validate([
+            'title' => ['required'],
+            'content'=>['required'],
+        ]);
+        $item = Announcement::findOrFail($id); 
+        $item->update($request->all());
+        // return Inertia::render('Announcement/Show', [
+        //     'id'=> $item->id
+        // ]);
     }
 
     public function destroy($id){
@@ -45,8 +56,8 @@ class AnnouncementController extends Controller
             'content'=>['required'],
         ]);
         $item = Announcement::create($request->all());
-        return Inertia::render('Announcement/Index', [
-            'item'=> $item
-        ]);
+        // return  Inertia::render('Announcement/Index', [
+        //     'id'=> $item->id
+        // ]);
     }
 }

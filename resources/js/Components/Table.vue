@@ -13,14 +13,12 @@
                     </th>
                 </tr>
             </thead>
-            <component :is="tbodyComp" :data="data" />
+            <slot></slot>
         </table>
     </div>
 </template>
 <script setup>
 const props = defineProps({
     headers: Array,
-    tbodyComp: Object,
-    data: Object,
 });
 </script>

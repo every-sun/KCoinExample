@@ -25,8 +25,19 @@
 </template>
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
-import { menus } from "../utils/data";
+import { inject } from "vue";
 const props = defineProps({
     toggleHamburger: Function,
 });
+const route = inject("route");
+
+const menus = [
+    { label: "K-Coin 사용", role: "user", url: route("user.coin.use.index") },
+    {
+        label: "K-Coin 관리",
+        role: "user",
+        url: route("user.coin.manage.index"),
+    },
+    { label: "문의 게시판", role: "user", url: route("inquiry.index") },
+];
 </script>
