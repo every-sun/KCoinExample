@@ -79,7 +79,11 @@ const form = useForm(
           }
 );
 
-const typeValue = ref(inquiryTypes[0].label);
+const typeValue = ref(
+    props.inquiry?.type
+        ? inquiryTypes.find((e) => e.value === props.inquiry.type).label
+        : inquiryTypes[0].label
+);
 const onTypeSelect = (v) => {
     inquiryTypes.find((e) => e.label === v);
     typeValue.value = v;
