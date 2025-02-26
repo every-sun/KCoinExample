@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]">
+    <ContentLayout>
         <div class="w-full">
             <div
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2"
@@ -92,10 +92,22 @@ import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
+import Layout from "@components/Layout.vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import { Link, router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
-import { inject, ref } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { inject, onMounted, ref } from "vue";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("product-manage");
+    pageStore.setTabIdx(0);
+});
 
 const route = inject("route");
 
@@ -105,17 +117,6 @@ const props = defineProps({
         required: false,
     },
 });
-
-const tabs = [
-    {
-        title: "상품 관리",
-        url: route("admin.product.index"),
-    },
-    {
-        title: "상품 등록",
-        url: route("admin.product.create"),
-    },
-];
 
 const confirmModalStore = useConfirmModalStore();
 

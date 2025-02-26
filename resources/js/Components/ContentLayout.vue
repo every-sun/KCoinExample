@@ -1,27 +1,30 @@
 <template>
-    <Header :toggleHamburger="toggleHamburger"></Header>
     <div class="w-full flex bg-white min-h-[100vh]">
-        <div
-            :class="['flex flex-col w-[15%] bg-primary pt-[150px] px-6  pb-20']"
-        >
-            <UserInfo :data="dummyData" />
-            <Menus />
-        </div>
-        <div class="w-[85%] 0">
+        <div class="bg-red-100 flex-1 0">
             <div
                 class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300"
             >
-                <p class="font-semibold text-2xl mb-4">
-                    {{ current?.title }}
+                <p
+                    class="font-semibold text-2xl mb-4"
+                    v-if="
+                        pageStore.currentPage &&
+                        pageStore.currentTabIdx >= 0 &&
+                        tabs[pageStore.currentPage]
+                    "
+                >
+                    {{
+                        tabs[pageStore.currentPage][pageStore.currentTabIdx]
+                            ?.title
+                    }}
                 </p>
                 <div class="flex gap-8">
                     <Link
-                        v-for="(item, i) in tabs"
+                        v-for="(item, i) in tabs[pageStore.currentPage]"
                         :href="item.url"
                         :key="item.title"
                         :class="[
                             'border-b-4 cursor-pointer py-2',
-                            current?.url === item.url
+                            i === pageStore.currentTabIdx
                                 ? 'border-b-secondary text-secondary'
                                 : 'border-b-transparent',
                         ]"
@@ -38,40 +41,53 @@
 <script setup>
 import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { Link } from "@inertiajs/vue3";
-import { ref } from "vue";
-import Header from "./Header.vue";
-import Menus from "./Menus.vue";
-import UserInfo from "./UserInfo.vue";
+import { inject } from "vue";
+import { useCurrentPageStore } from "../store/currentPage";
 
-const props = defineProps({
-    tabs: {
-        type: Array,
-        required: true,
-    },
-    current: Object,
-});
+const pageStore = useCurrentPageStore();
 
-const isHamburgerOn = ref(false);
+const route = inject("route");
 
-const toggleHamburger = (newValue) => {
-    isHamburgerOn.value = newValue;
+const tabs = {
+    "coin-use": [
+        {
+            title: "K-Coin 사용",
+            url: route("user.coin.use.index"),
+        },
+    ],
+    "coin-manage": [
+        {
+            title: "K-Coin 관리",
+            url: route("user.coin.manage.index"),
+        },
+    ],
+    inquiry: [
+        {
+            title: "문의 게시판",
+            url: route("inquiry.index"),
+        },
+        {
+            title: "문의 작성",
+            url: route("inquiry.create"),
+        },
+    ],
+    announcement: [
+        {
+            title: "공지사항",
+            url: route("announcement.index"),
+        },
+    ],
+    "product-manage": [
+        {
+            title: "상품 관리",
+            url: route("admin.product.index"),
+        },
+    ],
+    "admin-coin-manage": [
+        {
+            title: "K-Coin 관리",
+            url: route("admin.coin.index"),
+        },
+    ],
 };
-const dummyData = [
-    {
-        label: "누적 코인",
-        value: 1000,
-    },
-    {
-        label: "사용 코인",
-        value: 400,
-    },
-    {
-        label: "잔여 코인",
-        value: 600,
-    },
-    {
-        label: "등수",
-        value: 2,
-    },
-];
 </script>

@@ -1,18 +1,19 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]"
-        ><div>K코인 관리</div></ContentLayout
-    >
+    <ContentLayout><div>K코인 관리</div></ContentLayout>
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
-import { inject } from "vue";
+import Layout from "@components/Layout.vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted } from "vue";
 
-const route = inject("route");
+defineOptions({
+    layout: Layout,
+});
 
-const tabs = [
-    {
-        title: "K-Coin 관리",
-        url: route("admin.coin.index"),
-    },
-];
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("admin-coin-manage");
+    pageStore.setTabIdx(0);
+});
 </script>

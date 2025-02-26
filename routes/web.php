@@ -11,6 +11,10 @@ Route::get('/', function () {
     return Inertia::render('Home/Index');
 })->name('home');
 
+Route::get('/login', function (){
+    return Inertia::render('Auth/Login/Index');
+})->name('login');
+
 Route::prefix('/admin/product')->group(function(){
     Route::inertia('/create', 'Admin/Product/Create')->name('admin.product.create');
     Route::get('/', [ProductController::class, 'adminIndex'])->name('admin.product.index'); 

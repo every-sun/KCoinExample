@@ -4,6 +4,7 @@ const Ziggy = {
     defaults: {},
     routes: {
         home: { uri: "/", methods: ["GET", "HEAD"] },
+        login: { uri: "login", methods: ["GET", "HEAD"] },
         "admin.product.create": {
             uri: "admin/product/create",
             methods: ["GET", "HEAD"],

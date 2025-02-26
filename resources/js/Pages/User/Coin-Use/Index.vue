@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :current="tabs[0]" :tabs="tabs">
+    <ContentLayout>
         <div class="w-full">
             <div class="flex w-full items-center mb-3">
                 <div class="flex gap-2 items-center w-[60%] text-sm">
@@ -79,8 +79,20 @@ import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
+import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
-import { inject, ref } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted, ref } from "vue";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("coin-use");
+    pageStore.setTabIdx(0);
+});
 
 const props = defineProps({
     products: {
@@ -89,19 +101,10 @@ const props = defineProps({
     },
 });
 
-const route = inject("route");
-
 const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
 const sortValue = ref(sortOptions[0]);
 
 const onSort = (v) => {
     sortValue.value = v;
 };
-
-const tabs = [
-    {
-        title: "K-Coin 사용",
-        url: route("user.coin.use.index"),
-    },
-];
 </script>

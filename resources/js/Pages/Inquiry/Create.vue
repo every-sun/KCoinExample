@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[1]"
+    <ContentLayout
         ><form>
             <div class="flex w-full mb-6 gap-10">
                 <div class="flex flex-col gap-5 flex-1">
@@ -53,17 +53,27 @@
 import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
+import Layout from "@components/Layout.vue";
 import { router, useForm } from "@inertiajs/vue3";
-import { inject, ref } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { inject, onMounted, ref } from "vue";
 import { inquiryTypes } from "./data";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("inquiry");
+    pageStore.setTabIdx(1);
+});
 
 const route = inject("route");
 
 const props = defineProps({
     inquiry: Object,
 });
-
-console.log(props.inquiry);
 
 const form = useForm(
     props.inquiry
@@ -110,15 +120,4 @@ const onUpdate = () => {
         },
     });
 };
-
-const tabs = [
-    {
-        title: "문의 게시판",
-        url: route("inquiry.index"),
-    },
-    {
-        title: "문의 작성",
-        url: route("inquiry.create"),
-    },
-];
 </script>

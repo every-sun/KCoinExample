@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[1]"
+    <ContentLayout
         ><form @submit.prevent="isEdit ? onUpdate() : onSubmit()">
             <div class="flex w-full mb-6 gap-10">
                 <div>
@@ -60,8 +60,20 @@
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
+import Layout from "@components/Layout.vue";
 import { router, useForm } from "@inertiajs/vue3";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { inject, onMounted } from "vue";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("product-manage");
+    pageStore.setTabIdx(1);
+});
 
 const route = inject("route");
 
@@ -102,15 +114,4 @@ const onUpdate = () => {
         },
     });
 };
-
-const tabs = [
-    {
-        title: "상품 관리",
-        url: route("admin.product.index"),
-    },
-    {
-        title: "상품 등록",
-        url: route("admin.product.create"),
-    },
-];
 </script>

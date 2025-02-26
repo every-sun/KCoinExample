@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]">
+    <ContentLayout>
         <div>
             <div class="flex gap-3 cursor-pointer" @click="onPrev">
                 <ChevronLeftIcon class="w-6" />
@@ -14,10 +14,20 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import Layout from "@components/Layout.vue";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted } from "vue";
 
-const route = inject("route");
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("announcement");
+    pageStore.setTabIdx(0);
+});
 
 const props = defineProps({
     announcement: {
@@ -29,15 +39,4 @@ const props = defineProps({
 const onPrev = () => {
     window.history.back();
 };
-
-const tabs = [
-    {
-        title: "공지사항",
-        url: route("announcement.index"),
-    },
-    {
-        title: "공지사항 등록",
-        url: route("admin.announcement.create"),
-    },
-];
 </script>

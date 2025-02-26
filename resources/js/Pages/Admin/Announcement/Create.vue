@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[1]"
+    <ContentLayout
         ><form @submit.prevent="isEdit ? onUpdate() : onSubmit()">
             <div class="flex w-full mb-6 gap-10">
                 <div class="flex flex-col gap-5 flex-1">
@@ -37,8 +37,20 @@
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
+import Layout from "@components/Layout.vue";
 import { router, useForm } from "@inertiajs/vue3";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { inject, onMounted } from "vue";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("announcement");
+    pageStore.setTabIdx(1);
+});
 
 const route = inject("route");
 
@@ -79,20 +91,4 @@ const onUpdate = () => {
         },
     });
 };
-
-const tabs = [
-    {
-        title: "공지사항",
-        url: route("announcement.index"),
-    },
-    isEdit
-        ? {
-              title: "공지사항 수정",
-              url: route("admin.announcement.edit", props.announcement.id),
-          }
-        : {
-              title: "공지사항 등록",
-              url: route("admin.announcement.create"),
-          },
-];
 </script>
