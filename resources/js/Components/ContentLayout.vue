@@ -33,7 +33,7 @@
                     </Link>
                 </div>
             </div>
-            <div class="px-4 py-10"><slot></slot></div>
+            <div class="px-10 py-10"><slot></slot></div>
         </div>
     </div>
     <ConfirmModal />

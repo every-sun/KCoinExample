@@ -25,8 +25,6 @@ class InquiryFactory extends Factory
             'title' => $this->faker->sentence,
             'content' =>$this->faker->paragraph,
             'status' => 'W',
-            'answer' => null,
-            'answered_at' => null,
             'user_id' =>User::factory(),  
         ];
     }

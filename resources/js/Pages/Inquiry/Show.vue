@@ -49,6 +49,7 @@
                 {{ inquiry.content }}
             </p>
         </div>
+        <AnswerForm :id="inquiry.id" />
     </ContentLayout>
 </template>
 <script setup>
@@ -60,6 +61,7 @@ import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
 import { useConverter } from "@utils/useConverter";
 import { inject, onMounted } from "vue";
+import AnswerForm from "./Components/AnswerForm.vue";
 import { inquiryTypes } from "./data";
 
 defineOptions({
@@ -101,5 +103,9 @@ const onDelete = (id) => {
 
 const onEdit = (id) => {
     router.visit(route("inquiry.edit", id));
+};
+
+const onAnswer = (id) => {
+    router.put(route("inquiry.update", id));
 };
 </script>

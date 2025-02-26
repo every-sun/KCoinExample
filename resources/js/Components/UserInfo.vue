@@ -1,8 +1,10 @@
 <template>
     <div class="border-b-2 border-gray-400 pb-3">
-        <button class="cursor-pointer text-white flex items-center gap-5 mb-8">
+        <button
+            class="cursor-pointer text-white flex items-center gap-5 mb-8 w-full justify-between"
+        >
             <p>사용자님</p>
-            <p>></p>
+            <ChevronRightIcon class="w-4" />
         </button>
         <div class="flex flex-col gap-3">
             <p
