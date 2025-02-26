@@ -9,7 +9,7 @@
             <td class="px-2 py-1 whitespace-nowrap">2025-10-10 11:30:00</td>
             <td class="px-2 py-1">-</td>
             <td class="px-2 py-1">
-                <OutlineButton title="신청취소" class="px-2 text-sm" />
+                <OutlineButton class="px-2 text-sm">신청취소</OutlineButton>
             </td>
         </tr>
         <tr class="bg-white border-b border-gray-100 text-sm">

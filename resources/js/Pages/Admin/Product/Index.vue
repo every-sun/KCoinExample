@@ -16,7 +16,7 @@
                             <p>~</p>
                             <FilterNumberInput />
                         </div>
-                        <FillButton title="검색" class="text-xs px-8 py-1" />
+                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
                     </div>
                 </div>
             </div>

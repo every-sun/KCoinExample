@@ -2,7 +2,7 @@
     <div>
         <Header :toggleHamburger="toggleHamburger"></Header>
         <div
-            v-if="pageStore.currentPage === 'home'"
+            v-if="isDefault"
             :class="[
                 'fixed top-0 left-0 transition-all duration-[0.4s] w-full h-[100vh]',
                 isHomeHamburgerOn
@@ -12,7 +12,7 @@
             @click="toggleHamburger"
         ></div>
         <div
-            v-if="pageStore.currentPage === 'home'"
+            v-if="isDefault"
             :class="[
                 'fixed top-0 h-[100vh] bg-primary w-52 px-6 transition-all duration-[0.4s] z-10',
                 isHomeHamburgerOn
@@ -31,7 +31,7 @@
             <UserInfo :data="dummyData" />
             <Menus :toggleHamburger="toggleHamburger" />
         </div>
-        <slot v-if="pageStore.currentPage === 'home'"></slot>
+        <slot v-if="isDefault"></slot>
 
         <div v-else class="w-full flex bg-white min-h-[100vh]">
             <div
@@ -55,7 +55,7 @@
 </template>
 <script setup>
 import { useCurrentPageStore } from "@store/currentPage";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Header from "./Header.vue";
 import IconMenus from "./IconMenus.vue";
 import Menus from "./Menus.vue";
@@ -65,6 +65,10 @@ const pageStore = useCurrentPageStore();
 
 const isHomeHamburgerOn = ref(false);
 const isHamburgerOn = ref(true);
+
+const isDefault = computed(
+    () => pageStore.currentPage === "home" || pageStore.currentPage === "login"
+);
 
 const dummyData = [
     {
@@ -86,7 +90,7 @@ const dummyData = [
 ];
 
 const toggleHamburger = () => {
-    if (pageStore.currentPage === "home") {
+    if (isDefault) {
         isHomeHamburgerOn.value = !isHomeHamburgerOn.value;
     } else {
         isHamburgerOn.value = !isHamburgerOn.value;

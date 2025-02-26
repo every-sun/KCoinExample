@@ -26,12 +26,11 @@
                     </div>
                 </div>
             </div>
-            <FillButton
-                :title="isEdit ? '수정' : '등록'"
-                :class="'w-full py-2'"
-                type="submit"
-            /></form
-    ></ContentLayout>
+            <FillButton :class="'w-full py-2'" type="submit">{{
+                isEdit ? "수정" : "등록"
+            }}</FillButton>
+        </form></ContentLayout
+    >
 </template>
 
 <script setup>

@@ -41,7 +41,7 @@
                 <div class="flex gap-2 items-center">
                     <div class="flex-1 flex items-center justify-between">
                         <div class="w-96 flex gap-2 items-center"></div>
-                        <FillButton title="검색" class="text-xs px-8 py-1" />
+                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
                     </div>
                 </div>
             </div>
