@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]"
+    <ContentLayout
         ><div>
             <div
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
@@ -58,13 +58,23 @@ import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
+import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
 import Table from "@components/Table.vue";
-import { inject, ref } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted, ref } from "vue";
 import TableBody from "./Components/TableBody.vue";
 import { inquiryTypes } from "./data";
 
-const route = inject("route");
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("inquiry");
+    pageStore.setTabIdx(0);
+});
 
 const props = defineProps({
     inquiries: Object,
@@ -78,17 +88,6 @@ const onTypeSelect = (v) => {
     inquiryTypes.find((e) => e.label === v);
     typeValue.value = v;
 };
-
-const tabs = [
-    {
-        title: "문의 게시판",
-        url: route("inquiry.index"),
-    },
-    {
-        title: "문의 작성",
-        url: route("inquiry.create"),
-    },
-];
 
 const headers = isAdmin
     ? ["No", "제목", "작성일", "작성자", "답변여부", ""]

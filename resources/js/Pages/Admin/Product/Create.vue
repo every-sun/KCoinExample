@@ -1,6 +1,6 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[1]"
-        ><form @submit.prevent="onSubmit">
+    <ContentLayout
+        ><form @submit.prevent="isEdit ? onUpdate() : onSubmit()">
             <div class="flex w-full mb-6 gap-10">
                 <div>
                     <label
@@ -49,23 +49,55 @@
                     </div>
                 </div>
             </div>
-            <FillButton title="등록" :class="'w-full py-2'" /></form
+            <FillButton
+                :title="isEdit ? '수정' : '등록'"
+                :class="'w-full py-2'"
+                type="submit"
+            /></form
     ></ContentLayout>
 </template>
 
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
+import Layout from "@components/Layout.vue";
 import { router, useForm } from "@inertiajs/vue3";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { inject, onMounted } from "vue";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("product-manage");
+    pageStore.setTabIdx(1);
+});
 
 const route = inject("route");
 
-const form = useForm({
-    name: null,
-    description: null,
-    price: 0,
+const props = defineProps({
+    product: {
+        type: Object,
+    },
 });
+
+const isEdit = props.product !== undefined;
+
+const form = useForm(
+    isEdit
+        ? {
+              name: props.product.name,
+              description: props.product.description,
+              price: props.product.price,
+          }
+        : {
+              name: null,
+              description: null,
+              price: 0,
+          }
+);
 
 const onSubmit = () => {
     form.post(route("admin.product.store"), {
@@ -75,14 +107,11 @@ const onSubmit = () => {
     });
 };
 
-const tabs = [
-    {
-        title: "상품 관리",
-        url: route("admin.product.index"),
-    },
-    {
-        title: "상품 등록",
-        url: route("admin.product.create"),
-    },
-];
+const onUpdate = () => {
+    form.put(route("admin.product.update", props.product.id), {
+        onSuccess: () => {
+            router.visit(route("admin.product.index"));
+        },
+    });
+};
 </script>

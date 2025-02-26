@@ -11,7 +11,6 @@
             @click="toggleHamburger && toggleHamburger(false)"
         >
             <component :is="item.icon" class="w-5"></component>
-            {{ item.label }}
         </Link>
     </div>
 </template>
@@ -39,46 +38,28 @@ const route = inject("route");
 
 const menus = [
     {
-        label: "K-Coin 사용",
-        role: "user",
         url: route("user.coin.use.index"),
         icon: CurrencyDollarIcon,
-        type: "coin-use",
     },
     {
-        label: "K-Coin 관리",
-        role: "user",
         url: route("user.coin.manage.index"),
         icon: CircleStackIcon,
-        type: "coin-manage",
     },
     {
-        label: "문의 게시판",
-        role: "user",
         url: route("inquiry.index"),
         icon: QuestionMarkCircleIcon,
-        type: "inquiry",
     },
     {
-        label: "공지사항",
-        role: "user",
         url: route("announcement.index"),
         icon: BellIcon,
-        type: "announcement",
     },
     {
-        label: "상품 관리",
-        role: "admin",
         url: route("admin.product.index"),
         icon: ComputerDesktopIcon,
-        type: "product-manage",
     },
     {
-        label: "K-Coin 관리",
-        role: "admin",
         url: route("admin.coin.index"),
         icon: CircleStackIcon,
-        type: "admin-coin-manage",
     },
 ];
 </script>

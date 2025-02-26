@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]">
+    <ContentLayout>
         <div class="w-full">
             <div
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
@@ -43,11 +43,21 @@ import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
+import Layout from "@components/Layout.vue";
 import Table from "@components/Table.vue";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted } from "vue";
 import TableBody from "./Components/TableBody.vue";
 
-const route = inject("route");
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("coin-manage");
+    pageStore.setTabIdx(0);
+});
 
 const headers = [
     "No.",
@@ -58,12 +68,5 @@ const headers = [
     "지급날짜",
     "취소날짜",
     "취소신청",
-];
-
-const tabs = [
-    {
-        title: "K-Coin 관리",
-        url: route("user.coin.manage.index"),
-    },
 ];
 </script>

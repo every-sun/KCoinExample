@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]">
+    <ContentLayout>
         <div class="w-full">
             <div
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
@@ -48,12 +48,22 @@
 import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import FilterInput from "@components/FilterInput.vue";
+import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
 import Table from "@components/Table.vue";
-import { inject } from "vue";
+import { useCurrentPageStore } from "@store/currentPage";
+import { onMounted } from "vue";
 import TableBody from "./Components/TableBody.vue";
 
-const route = inject("route");
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("announcement");
+    pageStore.setTabIdx(0);
+});
 
 const props = defineProps({
     announcements: {
@@ -67,15 +77,4 @@ const isAdmin = true;
 const headers = isAdmin
     ? ["No", "제목", "등록일", "작성자", "", ""]
     : ["No", "제목", "등록일", "작성자"];
-
-const tabs = [
-    {
-        title: "공지사항",
-        url: route("announcement.index"),
-    },
-    {
-        title: "공지사항 등록",
-        url: route("admin.announcement.create"),
-    },
-];
 </script>

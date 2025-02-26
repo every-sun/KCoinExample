@@ -1,5 +1,5 @@
 <template>
-    <ContentLayout :tabs="tabs" :current="tabs[0]">
+    <ContentLayout>
         <div>
             <div class="flex gap-3 cursor-pointer" @click="onPrev">
                 <ChevronLeftIcon class="w-6" />
@@ -53,12 +53,24 @@
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
+import Layout from "@components/Layout.vue";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 import { router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
+import { useCurrentPageStore } from "@store/currentPage";
 import { useConverter } from "@utils/useConverter";
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 import { inquiryTypes } from "./data";
+
+defineOptions({
+    layout: Layout,
+});
+
+onMounted(() => {
+    const pageStore = useCurrentPageStore();
+    pageStore.setPage("inquiry");
+    pageStore.setTabIdx(0);
+});
 
 const route = inject("route");
 
@@ -90,15 +102,4 @@ const onDelete = (id) => {
 const onEdit = (id) => {
     router.visit(route("inquiry.edit", id));
 };
-
-const tabs = [
-    {
-        title: "문의 게시판",
-        url: route("inquiry.index"),
-    },
-    {
-        title: "문의 작성",
-        url: route("inquiry.create"),
-    },
-];
 </script>
