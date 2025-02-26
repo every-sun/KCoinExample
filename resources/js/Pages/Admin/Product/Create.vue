@@ -1,6 +1,6 @@
 <template>
     <ContentLayout :tabs="tabs" :current="tabs[1]"
-        ><form @submit.prevent="onSubmit">
+        ><form @submit.prevent="isEdit ? onUpdate() : onSubmit()">
             <div class="flex w-full mb-6 gap-10">
                 <div>
                     <label
@@ -49,7 +49,11 @@
                     </div>
                 </div>
             </div>
-            <FillButton title="등록" :class="'w-full py-2'" /></form
+            <FillButton
+                :title="isEdit ? '수정' : '등록'"
+                :class="'w-full py-2'"
+                type="submit"
+            /></form
     ></ContentLayout>
 </template>
 
@@ -61,14 +65,38 @@ import { inject } from "vue";
 
 const route = inject("route");
 
-const form = useForm({
-    name: null,
-    description: null,
-    price: 0,
+const props = defineProps({
+    product: {
+        type: Object,
+    },
 });
+
+const isEdit = props.product !== undefined;
+
+const form = useForm(
+    isEdit
+        ? {
+              name: props.product.name,
+              description: props.product.description,
+              price: props.product.price,
+          }
+        : {
+              name: null,
+              description: null,
+              price: 0,
+          }
+);
 
 const onSubmit = () => {
     form.post(route("admin.product.store"), {
+        onSuccess: () => {
+            router.visit(route("admin.product.index"));
+        },
+    });
+};
+
+const onUpdate = () => {
+    form.put(route("admin.product.update", props.product.id), {
         onSuccess: () => {
             router.visit(route("admin.product.index"));
         },

@@ -37,10 +37,20 @@
                     v-for="item in products.data"
                     :key="item.id"
                     class="ring-1 ring-gray-100 shadow shadow-gray-300 rounded-md p-2 cursor-pointer relative overflow-hidden"
+                    @click="onItemClick(item)"
                 >
-                    <p class="text-sm font-semibold truncate">
-                        {{ item.name }}
-                    </p>
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm font-semibold truncate">
+                            {{ item.name }}
+                        </p>
+                        <button
+                            type="button"
+                            class="bg-white text-gray-400 hover:text-gray-500 cursor-pointer"
+                            @click="(e) => onItemDelete(e, item)"
+                        >
+                            <XMarkIcon class="size-6" />
+                        </button>
+                    </div>
                     <div
                         class="bg-gray-200 h-24 flex items-center justify-center"
                     >
@@ -82,7 +92,9 @@ import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
-import { Link } from "@inertiajs/vue3";
+import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { Link, router } from "@inertiajs/vue3";
+import { useConfirmModalStore } from "@store/confilrModal";
 import { inject, ref } from "vue";
 
 const route = inject("route");
@@ -94,12 +106,6 @@ const props = defineProps({
     },
 });
 
-const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
-const sortValue = ref(sortOptions[0]);
-const onSort = (v) => {
-    sortValue.value = v;
-};
-
 const tabs = [
     {
         title: "상품 관리",
@@ -110,4 +116,29 @@ const tabs = [
         url: route("admin.product.create"),
     },
 ];
+
+const confirmModalStore = useConfirmModalStore();
+
+const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
+const sortValue = ref(sortOptions[0]);
+
+const onSort = (v) => {
+    sortValue.value = v;
+};
+
+const onItemDelete = (e, item) => {
+    e.stopPropagation();
+    confirmModalStore.init({
+        text: `[${item.name}] 상품을 삭제하시겠습니까?`,
+        func: () => {
+            router.delete(route("admin.product.destroy", item.id));
+        },
+    });
+    confirmModalStore.open();
+};
+
+const onItemClick = (item) => {
+    console.log("CLICK");
+    router.visit(route("admin.product.edit", item.id));
+};
 </script>

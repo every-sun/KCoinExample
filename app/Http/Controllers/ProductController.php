@@ -16,7 +16,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request){ // 상품 생성 (관리자)
+    public function edit($id){
+        $item = Product::findOrFail($id);
+        return Inertia::render('Admin/Product/Create', [
+            'product' => $item
+        ]   );
+    }
+
+    public function store(Request $request){ 
         $request->validate([
             'name' => ['required'],
             'description' => [],
@@ -24,6 +31,20 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
-        return;
+    }
+
+    public function update($id, Request $request){
+        $request->validate([
+            'name' => ['required'],
+            'description' => [],
+            'price' => ['required']
+        ]);
+        $item = Product::findOrFail($id);
+        $item->update($request->all());
+    }
+
+    public function destroy($id){
+        $item = Product::destroy($id);
+        return redirect()->route('admin.product.index');
     }
 }

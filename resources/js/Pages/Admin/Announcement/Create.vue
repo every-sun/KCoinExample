@@ -1,6 +1,6 @@
 <template>
     <ContentLayout :tabs="tabs" :current="tabs[1]"
-        ><form>
+        ><form @submit.prevent="isEdit ? onUpdate() : onSubmit()">
             <div class="flex w-full mb-6 gap-10">
                 <div class="flex flex-col gap-5 flex-1">
                     <div class="flex flex-col gap-1">
@@ -27,16 +27,9 @@
                 </div>
             </div>
             <FillButton
-                v-if="announcement"
-                title="수정"
+                :title="isEdit ? '수정' : '등록'"
                 :class="'w-full py-2'"
-                @click.prevent="onUpdate"
-            />
-            <FillButton
-                v-else
-                title="등록"
-                :class="'w-full py-2'"
-                @click.prevent="onSubmit"
+                type="submit"
             /></form
     ></ContentLayout>
 </template>
@@ -53,8 +46,10 @@ const props = defineProps({
     announcement: Object,
 });
 
+const isEdit = props.announcement !== undefined;
+
 const form = useForm(
-    props.announcement
+    isEdit
         ? {
               title: props.announcement.title,
               content: props.announcement.content,
@@ -90,7 +85,7 @@ const tabs = [
         title: "공지사항",
         url: route("announcement.index"),
     },
-    props.announcement
+    isEdit
         ? {
               title: "공지사항 수정",
               url: route("admin.announcement.edit", props.announcement.id),

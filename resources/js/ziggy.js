@@ -12,7 +12,22 @@ const Ziggy = {
             uri: "admin/product",
             methods: ["GET", "HEAD"],
         },
+        "admin.product.edit": {
+            uri: "admin/product/{id}/edit",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
         "admin.product.store": { uri: "admin/product", methods: ["POST"] },
+        "admin.product.update": {
+            uri: "admin/product/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
+        "admin.product.destroy": {
+            uri: "admin/product/{id}",
+            methods: ["DELETE"],
+            parameters: ["id"],
+        },
         "user.coin.manage.index": {
             uri: "user/k-coin/manage",
             methods: ["GET", "HEAD"],

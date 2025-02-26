@@ -14,7 +14,10 @@ Route::get('/', function () {
 Route::prefix('/admin/product')->group(function(){
     Route::inertia('/create', 'Admin/Product/Create')->name('admin.product.create');
     Route::get('/', [ProductController::class, 'adminIndex'])->name('admin.product.index'); 
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('admin.product.edit');
     Route::post('/', [ProductController::class, 'store'])->name('admin.product.store'); 
+    Route::put('/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
 });
 
 Route::prefix('/user/k-coin')->group(function(){
