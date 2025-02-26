@@ -51,12 +51,11 @@
                             </p>
                             <div class="mt-5 flex gap-2 justify-end">
                                 <WhiteButton
-                                    :title="store.cancelBtn"
                                     class="text-sm px-3 py-1.5"
                                     @click="store.close"
-                                />
+                                    >{{ store.cancelBtn }}</WhiteButton
+                                >
                                 <FillButton
-                                    :title="store.agreeBtn"
                                     class="text-sm px-3 py-1.5"
                                     @click="
                                         () => {
@@ -64,7 +63,8 @@
                                             store.close();
                                         }
                                     "
-                                />
+                                    >{{ store.agreeBtn }}</FillButton
+                                >
                             </div>
                         </DialogPanel>
                     </TransitionChild>

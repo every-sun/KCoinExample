@@ -24,7 +24,7 @@
                             <p>~</p>
                             <FilterNumberInput />
                         </div>
-                        <FillButton title="검색" class="text-xs px-8 py-1" />
+                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
                     </div>
                 </div>
             </div>
@@ -61,10 +61,10 @@
                         {{ item.price }} 코인
                     </p>
                     <FillButton
-                        title="신청"
                         @click="() => {}"
                         :class="'w-full text-sm rounded-none'"
-                    />
+                        >신청</FillButton
+                    >
                 </div>
             </div>
             <PageController

@@ -23,19 +23,17 @@
                 class="px-2 py-1 flex gap-1 whitespace-nowrap items-center"
             >
                 <OutlineButton
-                    title="삭제"
                     class="px-2 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);
                         }
                     "
-                />
-                <OutlineButton
-                    title="수정"
-                    class="px-2 text-sm"
-                    @click="onEdit(item.id)"
-                />
+                    >삭제</OutlineButton
+                >
+                <OutlineButton class="px-2 text-sm" @click="onEdit(item.id)"
+                    >수정</OutlineButton
+                >
             </td>
         </tr>
     </tbody>

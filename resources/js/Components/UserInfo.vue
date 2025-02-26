@@ -17,15 +17,16 @@
                     {{ item.value }}
                 </span>
             </p>
-            <WhiteButton
-                title="상세 코인 적립 내역 확인하기 >"
-                class="text-xs py-1"
-            />
+            <WhiteButton class="text-xs py-1 px-2">
+                <p>상세 코인 적립 내역</p>
+                <ChevronRightIcon class="w-3" />
+            </WhiteButton>
         </div>
     </div>
 </template>
 <script setup>
 import WhiteButton from "@components/Button/WhiteButton.vue";
+import { ChevronRightIcon } from "@heroicons/vue/24/outline";
 const props = defineProps({
     data: {
         type: Object,

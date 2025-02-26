@@ -36,17 +36,15 @@
             </div>
             <FillButton
                 v-if="inquiry"
-                title="수정"
                 :class="'w-full py-2'"
                 @click.prevent="onUpdate"
-            />
-            <FillButton
-                v-else
-                title="등록"
-                :class="'w-full py-2'"
-                @click.prevent="onSubmit"
-            /></form
-    ></ContentLayout>
+                >수정</FillButton
+            >
+            <FillButton v-else :class="'w-full py-2'" @click.prevent="onSubmit"
+                >등록</FillButton
+            >
+        </form></ContentLayout
+    >
 </template>
 
 <script setup>

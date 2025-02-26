@@ -30,14 +30,14 @@
                 class="px-2 py-1 flex gap-1 whitespace-nowrap items-center"
             >
                 <OutlineButton
-                    title="삭제"
                     class="px-2 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);
                         }
                     "
-                />
+                    >삭제</OutlineButton
+                >
             </td>
         </tr>
     </tbody>
