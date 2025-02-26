@@ -3,7 +3,7 @@
         class="w-full h-[80px] p-[24px] bg-white flex justify-between items-center fixed top-0 z-10 drop-shadow-sm"
     >
         <div class="flex gap-5">
-            <button class="cursor-pointer" @click="toggleHamburger(true)">
+            <button class="cursor-pointer" @click="toggleHamburger">
                 <Bars3Icon class="w-8" />
             </button>
             <button class="cursor-pointer" @click="router.visit('/')">

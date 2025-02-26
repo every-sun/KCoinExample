@@ -9,7 +9,7 @@
                     ? 'pointer-events-auto bg-gray-500/75'
                     : 'pointer-events-none bg-transparent',
             ]"
-            @click="toggleHamburger(false)"
+            @click="toggleHamburger"
         ></div>
         <div
             v-if="pageStore.currentPage === 'home'"
@@ -23,7 +23,7 @@
             <div class="w-full h-[80px] flex items-center">
                 <button
                     class="text-white cursor-pointer text-2xl"
-                    @click="toggleHamburger(false)"
+                    @click="toggleHamburger"
                 >
                     X
                 </button>
@@ -32,14 +32,22 @@
             <Menus :toggleHamburger="toggleHamburger" />
         </div>
         <slot v-if="pageStore.currentPage === 'home'"></slot>
+
         <div v-else class="w-full flex bg-white min-h-[100vh]">
             <div
+                v-if="isHamburgerOn"
                 :class="[
-                    'flex flex-col w-[15%] bg-primary pt-[150px] px-6  pb-20',
+                    'flex flex-col w-[15%] bg-primary pt-[150px] px-6 pb-20',
                 ]"
             >
                 <UserInfo :data="dummyData" />
                 <Menus />
+            </div>
+            <div
+                v-else
+                :class="['flex flex-col bg-primary pt-[100px] px-2 pb-20']"
+            >
+                <IconMenus />
             </div>
             <slot></slot>
         </div>
@@ -49,13 +57,14 @@
 import { useCurrentPageStore } from "@store/currentPage";
 import { ref } from "vue";
 import Header from "./Header.vue";
+import IconMenus from "./IconMenus.vue";
 import Menus from "./Menus.vue";
 import UserInfo from "./UserInfo.vue";
 
 const pageStore = useCurrentPageStore();
 
 const isHomeHamburgerOn = ref(false);
-const isHamburgerOn = ref(false);
+const isHamburgerOn = ref(true);
 
 const dummyData = [
     {
@@ -76,11 +85,11 @@ const dummyData = [
     },
 ];
 
-const toggleHamburger = (newValue) => {
+const toggleHamburger = () => {
     if (pageStore.currentPage === "home") {
-        isHomeHamburgerOn.value = newValue;
+        isHomeHamburgerOn.value = !isHomeHamburgerOn.value;
     } else {
-        isHamburgerOn.value = newValue;
+        isHamburgerOn.value = !isHamburgerOn.value;
     }
 };
 </script>

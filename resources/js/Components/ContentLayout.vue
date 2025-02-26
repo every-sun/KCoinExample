@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex bg-white min-h-[100vh]">
-        <div class="bg-red-100 flex-1 0">
+        <div class="bg-white flex-1 0">
             <div
                 class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300"
             >
