@@ -76,11 +76,19 @@ const tabs = {
             title: "공지사항",
             url: route("announcement.index"),
         },
+        {
+            title: "공지사항 등록",
+            url: route("admin.announcement.create"),
+        },
     ],
     "product-manage": [
         {
             title: "상품 관리",
             url: route("admin.product.index"),
+        },
+        {
+            title: "상품 등록",
+            url: route("admin.product.create"),
         },
     ],
     "admin-coin-manage": [
