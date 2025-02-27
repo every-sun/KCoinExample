@@ -36,10 +36,8 @@
             <div class="px-10 py-10"><slot></slot></div>
         </div>
     </div>
-    <ConfirmModal />
 </template>
 <script setup>
-import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { Link } from "@inertiajs/vue3";
 import { inject } from "vue";
 import { useCurrentPageStore } from "../store/currentPage";
@@ -95,6 +93,16 @@ const tabs = {
         {
             title: "K-Coin 관리",
             url: route("admin.coin.index"),
+        },
+        {
+            title: "K-Coin 발행",
+            url: route("admin.coin.create"),
+        },
+    ],
+    "admin-user": [
+        {
+            title: "사용자 관리",
+            url: route("admin.user.index"),
         },
     ],
 };

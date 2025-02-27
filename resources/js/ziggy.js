@@ -5,6 +5,25 @@ const Ziggy = {
     routes: {
         home: { uri: "/", methods: ["GET", "HEAD"] },
         login: { uri: "login", methods: ["GET", "HEAD"] },
+        "user.coin.manage.index": {
+            uri: "user/k-coin/manage",
+            methods: ["GET", "HEAD"],
+        },
+        "user.coin.use.index": {
+            uri: "user/k-coin/use",
+            methods: ["GET", "HEAD"],
+        },
+        "user.coin.use.store": { uri: "user/k-coin/use", methods: ["POST"] },
+        "user.coin.use.update": {
+            uri: "user/k-coin/use/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
+        "admin.coin.index": { uri: "admin/k-coin", methods: ["GET", "HEAD"] },
+        "admin.coin.create": {
+            uri: "admin/k-coin/create",
+            methods: ["GET", "HEAD"],
+        },
         "admin.product.create": {
             uri: "admin/product/create",
             methods: ["GET", "HEAD"],
@@ -29,21 +48,6 @@ const Ziggy = {
             methods: ["DELETE"],
             parameters: ["id"],
         },
-        "user.coin.manage.index": {
-            uri: "user/k-coin/manage",
-            methods: ["GET", "HEAD"],
-        },
-        "user.coin.use.index": {
-            uri: "user/k-coin/use",
-            methods: ["GET", "HEAD"],
-        },
-        "user.coin.use.store": { uri: "user/k-coin/use", methods: ["POST"] },
-        "user.coin.use.update": {
-            uri: "user/k-coin/use/{id}",
-            methods: ["PUT"],
-            parameters: ["id"],
-        },
-        "admin.coin.index": { uri: "admin/k-coin", methods: ["GET", "HEAD"] },
         "admin.announcement.create": {
             uri: "admin/announcement/create",
             methods: ["GET", "HEAD"],
@@ -67,6 +71,22 @@ const Ziggy = {
             methods: ["DELETE"],
             parameters: ["id"],
         },
+        "admin.user.index": { uri: "admin/user", methods: ["GET", "HEAD"] },
+        "admin.inquiry.answer.store": {
+            uri: "admin/inquiry/{inquiry_id}/answer",
+            methods: ["POST"],
+            parameters: ["inquiry_id"],
+        },
+        "admin.inquiry.answer.destroy": {
+            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
+            methods: ["DELETE"],
+            parameters: ["inquiry_id", "id"],
+        },
+        "admin.inquiry.answer.update": {
+            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
+            methods: ["PUT"],
+            parameters: ["inquiry_id", "id"],
+        },
         "inquiry.index": { uri: "inquiry", methods: ["GET", "HEAD"] },
         "inquiry.create": { uri: "inquiry/create", methods: ["GET", "HEAD"] },
         "inquiry.edit": {
@@ -89,21 +109,6 @@ const Ziggy = {
             uri: "inquiry/{id}",
             methods: ["DELETE"],
             parameters: ["id"],
-        },
-        "admin.inquiry.answer.store": {
-            uri: "admin/inquiry/{inquiry_id}/answer",
-            methods: ["POST"],
-            parameters: ["inquiry_id"],
-        },
-        "admin.inquiry.answer.destroy": {
-            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
-            methods: ["DELETE"],
-            parameters: ["inquiry_id", "id"],
-        },
-        "admin.inquiry.answer.update": {
-            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
-            methods: ["PUT"],
-            parameters: ["inquiry_id", "id"],
         },
         "announcement.index": { uri: "announcement", methods: ["GET", "HEAD"] },
         "announcement.show": {
