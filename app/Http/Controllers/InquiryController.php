@@ -9,13 +9,13 @@ use App\Models\Inquiry;
 class InquiryController extends Controller
 {
     public function index(){
-        $inquiries = Inquiry::orderByDesc('created_at')->paginate(20);
+        $inquiries = Inquiry::withCount('answers')->orderByDesc('created_at')->paginate(20);
         return Inertia::render('Inquiry/Index', [
             'inquiries'=>$inquiries
         ]);
     }
     public function show($id){
-        $item = Inquiry::findOrFail($id); 
+        $item = Inquiry::with('answers')->findOrFail($id); 
         return Inertia::render('Inquiry/Show', [
             'inquiry'=> $item
         ]);

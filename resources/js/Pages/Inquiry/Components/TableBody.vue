@@ -9,41 +9,40 @@
                 {{ (data.current_page - 1) * data.per_page + i + 1 }}
             </td>
             <td
-                class="px-2 py-1 hover:underline cursor-pointer"
+                class="px-2 py-2 hover:underline cursor-pointer"
                 @click="onItemClick(item.id)"
             >
                 {{
                     `[${
                         typeOptions.find((e) => e.value === item.type).label
-                    }] ${item.title} `
+                    }] ${item.title}`
                 }}
+                {{ item.answers_count > 0 ? ` [${item.answers_count}]` : "" }}
             </td>
             <td class="px-2 py-1 whitespace-nowrap">
                 {{ timestampToDate(item.created_at) }}
             </td>
             <td class="px-2 py-1">작성자명</td>
-            <td class="px-2 py-1">
-                {{ item.isAnswer ? "답변완료" : "미답변" }}
+            <td v-if="item.answers_count > 0" class="px-2 py-1 font-semibold">
+                답변완료
             </td>
-            <td
-                v-if="isAdmin"
-                class="px-2 py-1 flex gap-1 whitespace-nowrap items-center"
-            >
-                <OutlineButton
+            <td v-else class="px-2 py-1">미답변</td>
+            <td v-if="isAdmin" class="px-2 py-1 whitespace-nowrap items-center">
+                <WhiteButton
                     class="px-2 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);
                         }
                     "
-                    >삭제</OutlineButton
+                    >삭제</WhiteButton
                 >
             </td>
         </tr>
     </tbody>
 </template>
 <script setup>
-import OutlineButton from "@components/Button/OutlineButton.vue";
+import WhiteButton from "@components/Button/WhiteButton.vue";
 import { router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useConverter } from "@utils/useConverter";

@@ -34,7 +34,14 @@
                     </div>
                 </div>
             </div>
-            <Table :headers="headers"><TableBody /></Table>
+            <Table :headers="headers"
+                ><TableBody :data="coin_requests"
+            /></Table>
+            <PageController
+                :links="coin_requests.links"
+                :currentPage="coin_requests.current_page"
+                :isScrollPreserve="true"
+            />
         </div>
     </ContentLayout>
 </template>
@@ -44,6 +51,7 @@ import ContentLayout from "@components/ContentLayout.vue";
 import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
 import Layout from "@components/Layout.vue";
+import PageController from "@components/PageController.vue";
 import Table from "@components/Table.vue";
 import { useCurrentPageStore } from "@store/currentPage";
 import { onMounted } from "vue";
@@ -59,14 +67,20 @@ onMounted(() => {
     pageStore.setTabIdx(0);
 });
 
+const props = defineProps({
+    coin_requests: {
+        type: Object,
+    },
+});
+
 const headers = [
-    "No.",
-    "날짜",
+    "No",
+    "신청날짜",
     "상품명",
     "사용코인",
     "진행상태",
     "지급날짜",
-    "취소날짜",
+    "취소신청날짜",
     "취소신청",
 ];
 </script>

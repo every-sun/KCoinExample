@@ -52,8 +52,10 @@
             <slot></slot>
         </div>
     </div>
+    <ConfirmModal />
 </template>
 <script setup>
+import ConfirmModal from "@components/Modal/ConfirmModal.vue";
 import { useCurrentPageStore } from "@store/currentPage";
 import { computed, ref } from "vue";
 import Header from "./Header.vue";
@@ -90,7 +92,7 @@ const dummyData = [
 ];
 
 const toggleHamburger = () => {
-    if (isDefault) {
+    if (isDefault.value) {
         isHomeHamburgerOn.value = !isHomeHamburgerOn.value;
     } else {
         isHamburgerOn.value = !isHamburgerOn.value;

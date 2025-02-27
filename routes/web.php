@@ -5,6 +5,8 @@ use App\Http\Controllers\CoinController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CoinRequestController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -25,12 +27,14 @@ Route::prefix('/admin/product')->group(function(){
 });
 
 Route::prefix('/user/k-coin')->group(function(){
-    Route::get('/manage', [CoinController::class, 'userManageIndex'])->name('user.coin.manage.index'); 
-    Route::get('/use', [CoinController::class, 'userUseIndex'])->name('user.coin.use.index'); 
+    Route::get('/manage', [CoinRequestController::class, 'userManageIndex'])->name('user.coin.manage.index'); 
+    Route::get('/use', [CoinRequestController::class, 'userUseIndex'])->name('user.coin.use.index'); 
+    Route::post('/use', [CoinRequestController::class, 'store'])->name('user.coin.use.store');
+    Route::put('/use/{id}', [CoinRequestController::class, 'update'])->name('user.coin.use.update');
 });
 
 Route::prefix('/admin/k-coin')->group(function(){
-    Route::get('/', [CoinController::class, 'adminManageIndex'])->name('admin.coin.index'); 
+    Route::get('/', [CoinRequestController::class, 'adminManageIndex'])->name('admin.coin.index'); 
 });
 
 Route::prefix('/admin/announcement')->group(function(){
@@ -61,3 +65,4 @@ Route::prefix('/announcement')->group(function(){
     Route::get('/', [AnnouncementController::class, 'index'])->name('announcement.index');
     Route::get('/{id}', [AnnouncementController::class, 'show'])->name('announcement.show');
 });
+

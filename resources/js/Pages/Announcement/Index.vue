@@ -33,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <Table :headers="headers"
+            <PostTable :headers="headers"
                 ><TableBody :data="announcements"
-            /></Table>
+            /></PostTable>
             <PageController
                 :links="announcements.links"
                 :currentPage="announcements.current_page"
@@ -50,7 +50,7 @@ import ContentLayout from "@components/ContentLayout.vue";
 import FilterInput from "@components/FilterInput.vue";
 import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
-import Table from "@components/Table.vue";
+import PostTable from "@components/PostTable.vue";
 import { useCurrentPageStore } from "@store/currentPage";
 import { onMounted } from "vue";
 import TableBody from "./Components/TableBody.vue";
