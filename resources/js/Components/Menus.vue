@@ -80,5 +80,12 @@ const menus = [
         icon: CircleStackIcon,
         type: "admin-coin-manage",
     },
+    {
+        label: "사용자 관리",
+        role: "admin",
+        url: route("admin.user.index"),
+        icon: CircleStackIcon,
+        type: "admin-user",
+    },
 ];
 </script>
