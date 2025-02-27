@@ -61,12 +61,13 @@
                         {{ item.price }} 코인
                     </p>
                     <FillButton
-                        @click="() => {}"
+                        @click="onClick(item)"
                         :class="'w-full text-sm rounded-none'"
                         >신청</FillButton
                     >
                 </div>
             </div>
+
             <PageController
                 :links="products.links"
                 :currentPage="products.current_page"
@@ -81,8 +82,10 @@ import FilterInput from "@components/FilterInput.vue";
 import FilterNumberInput from "@components/FilterNumberInput.vue";
 import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
+import { router } from "@inertiajs/vue3";
+import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
-import { onMounted, ref } from "vue";
+import { inject, onMounted, ref } from "vue";
 
 defineOptions({
     layout: Layout,
@@ -94,6 +97,8 @@ onMounted(() => {
     pageStore.setTabIdx(0);
 });
 
+const route = inject("route");
+
 const props = defineProps({
     products: {
         type: Object,
@@ -101,10 +106,25 @@ const props = defineProps({
     },
 });
 
+const confirmModalStore = useConfirmModalStore();
+
 const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
 const sortValue = ref(sortOptions[0]);
 
 const onSort = (v) => {
     sortValue.value = v;
+};
+
+const onClick = (v) => {
+    confirmModalStore.init({
+        text: `${v.price} 코인을 사용하시겠습니까?`,
+        func: () => {
+            router.post(route("user.coin.use.store"), {
+                product_id: v.id,
+                used_coins: v.price,
+            });
+        },
+    });
+    confirmModalStore.open();
 };
 </script>

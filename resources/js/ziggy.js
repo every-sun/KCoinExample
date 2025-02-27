@@ -37,6 +37,12 @@ const Ziggy = {
             uri: "user/k-coin/use",
             methods: ["GET", "HEAD"],
         },
+        "user.coin.use.store": { uri: "user/k-coin/use", methods: ["POST"] },
+        "user.coin.use.update": {
+            uri: "user/k-coin/use/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
         "admin.coin.index": { uri: "admin/k-coin", methods: ["GET", "HEAD"] },
         "admin.announcement.create": {
             uri: "admin/announcement/create",
@@ -83,6 +89,21 @@ const Ziggy = {
             uri: "inquiry/{id}",
             methods: ["DELETE"],
             parameters: ["id"],
+        },
+        "admin.inquiry.answer.store": {
+            uri: "admin/inquiry/{inquiry_id}/answer",
+            methods: ["POST"],
+            parameters: ["inquiry_id"],
+        },
+        "admin.inquiry.answer.destroy": {
+            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
+            methods: ["DELETE"],
+            parameters: ["inquiry_id", "id"],
+        },
+        "admin.inquiry.answer.update": {
+            uri: "admin/inquiry/{inquiry_id}/answer/{id}",
+            methods: ["PUT"],
+            parameters: ["inquiry_id", "id"],
         },
         "announcement.index": { uri: "announcement", methods: ["GET", "HEAD"] },
         "announcement.show": {

@@ -20,26 +20,26 @@
             <td class="px-2 py-1">관리자</td>
             <td
                 v-if="isAdmin"
-                class="px-2 py-1 flex gap-1 whitespace-nowrap items-center"
+                class="px-2 py-1 whitespace-nowrap flex gap-1 items-center justify-center"
             >
-                <OutlineButton
+                <WhiteButton
                     class="px-2 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);
                         }
                     "
-                    >삭제</OutlineButton
+                    >삭제</WhiteButton
                 >
-                <OutlineButton class="px-2 text-sm" @click="onEdit(item.id)"
-                    >수정</OutlineButton
+                <WhiteButton class="px-2 text-sm" @click="onEdit(item.id)"
+                    >수정</WhiteButton
                 >
             </td>
         </tr>
     </tbody>
 </template>
 <script setup>
-import OutlineButton from "@components/Button/OutlineButton.vue";
+import WhiteButton from "@components/Button/WhiteButton.vue";
 import { router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useConverter } from "@utils/useConverter";

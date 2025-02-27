@@ -45,7 +45,9 @@
                     </div>
                 </div>
             </div>
-            <Table :headers="headers"><TableBody :data="inquiries" /></Table>
+            <PostTable :headers="headers"
+                ><TableBody :data="inquiries"
+            /></PostTable>
             <PageController
                 :links="inquiries.links"
                 :currentPage="inquiries.current_page"
@@ -60,7 +62,7 @@ import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
 import Layout from "@components/Layout.vue";
 import PageController from "@components/PageController.vue";
-import Table from "@components/Table.vue";
+import PostTable from "@components/PostTable.vue";
 import { useCurrentPageStore } from "@store/currentPage";
 import { onMounted, ref } from "vue";
 import TableBody from "./Components/TableBody.vue";
