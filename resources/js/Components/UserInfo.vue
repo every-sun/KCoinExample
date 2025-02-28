@@ -1,6 +1,7 @@
 <template>
     <div class="border-b-2 border-gray-400 pb-3">
         <button
+            @click="moveProfileEditPage"
             class="cursor-pointer text-white flex items-center gap-5 mb-8 w-full justify-between"
         >
             <p>사용자님</p>
@@ -19,8 +20,11 @@
                     {{ item.value }}
                 </span>
             </p>
-            <WhiteButton class="text-xs py-1 px-2">
-                <p>상세 코인 적립 내역</p>
+            <WhiteButton
+                class="py-2 px-2 text-sm flex justify-between items-center"
+                @click="moveCoinPage"
+            >
+                <p>코인 적립 내역</p>
                 <ChevronRightIcon class="w-3" />
             </WhiteButton>
         </div>
@@ -29,9 +33,22 @@
 <script setup>
 import WhiteButton from "@components/Button/WhiteButton.vue";
 import { ChevronRightIcon } from "@heroicons/vue/24/outline";
+import { router } from "@inertiajs/vue3";
+import { inject } from "vue";
+
 const props = defineProps({
     data: {
         type: Object,
     },
 });
+
+const route = inject("route");
+
+const moveCoinPage = () => {
+    router.visit(route("user.coin.index"));
+};
+
+const moveProfileEditPage = () => {
+    router.visit(route("user.profile.edit"));
+};
 </script>

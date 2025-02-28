@@ -147,7 +147,6 @@ const onItemDelete = (e, item) => {
 };
 
 const onItemClick = (item) => {
-    console.log("CLICK");
     router.visit(route("admin.product.edit", item.id));
 };
 </script>

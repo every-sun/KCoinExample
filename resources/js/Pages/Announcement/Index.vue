@@ -36,10 +36,17 @@
                     </div>
                 </div>
             </div>
-            <PostTable :headers="headers"
-                ><TableBody :data="announcements"
-            /></PostTable>
+            <PostTable :headers="headers">
+                <TableBody
+                    v-if="announcements.data.length > 0"
+                    :data="announcements"
+                />
+                <p v-else class="text-gray-700 py-5 text-sm">
+                    등록된 공지사항이 없습니다.
+                </p>
+            </PostTable>
             <PageController
+                v-if="announcements.data.length > 0"
                 :links="announcements.links"
                 :currentPage="announcements.current_page"
                 :isScrollPreserve="true"

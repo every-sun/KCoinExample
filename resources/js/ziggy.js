@@ -5,6 +5,7 @@ const Ziggy = {
     routes: {
         home: { uri: "/", methods: ["GET", "HEAD"] },
         login: { uri: "login", methods: ["GET", "HEAD"] },
+        "user.coin.index": { uri: "user/k-coin", methods: ["GET", "HEAD"] },
         "user.coin.manage.index": {
             uri: "user/k-coin/manage",
             methods: ["GET", "HEAD"],
@@ -19,6 +20,7 @@ const Ziggy = {
             methods: ["PUT"],
             parameters: ["id"],
         },
+        "user.profile.edit": { uri: "user/profile", methods: ["GET", "HEAD"] },
         "admin.coin.index": { uri: "admin/k-coin", methods: ["GET", "HEAD"] },
         "admin.coin.create": {
             uri: "admin/k-coin/create",

@@ -5,7 +5,7 @@
             v-for="(item, i) in data.data"
             :key="item.id"
         >
-            <td class="px-2 py-1">
+            <td class="px-2 py-2">
                 {{ (data.current_page - 1) * data.per_page + i + 1 }}
             </td>
             <td
@@ -19,17 +19,17 @@
                 }}
                 {{ item.answers_count > 0 ? ` [${item.answers_count}]` : "" }}
             </td>
-            <td class="px-2 py-1 whitespace-nowrap">
+            <td class="px-2 py-2 whitespace-nowrap">
                 {{ timestampToDate(item.created_at) }}
             </td>
-            <td class="px-2 py-1">작성자명</td>
+            <td class="px-2 py-2">작성자명</td>
             <td v-if="item.answers_count > 0" class="px-2 py-1 font-semibold">
                 답변완료
             </td>
-            <td v-else class="px-2 py-1">미답변</td>
+            <td v-else class="px-2 py-2">미답변</td>
             <td v-if="isAdmin" class="px-2 py-1 whitespace-nowrap items-center">
                 <WhiteButton
-                    class="px-2 text-sm"
+                    class="px-2 py-1 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);

@@ -45,9 +45,16 @@
                 </div>
             </div>
             <PostTable :headers="headers"
-                ><TableBody :data="inquiries"
-            /></PostTable>
+                ><TableBody
+                    v-if="inquiries.data.length > 0"
+                    :data="inquiries"
+                />
+                <p v-else class="text-gray-700 py-5 text-sm">
+                    등록된 문의사항이 없습니다.
+                </p></PostTable
+            >
             <PageController
+                v-if="inquiries.data.length > 0"
                 :links="inquiries.links"
                 :currentPage="inquiries.current_page"
                 :isScrollPreserve="true"

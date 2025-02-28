@@ -5,30 +5,32 @@
             :key="item.id"
             class="bg-white border-b border-gray-100 text-sm"
         >
-            <td class="px-2 py-1">
+            <td class="px-2 py-2">
                 {{ (data.current_page - 1) * data.per_page + i + 1 }}
             </td>
-            <td class="px-2 py-1 whitespace-nowrap">
+            <td class="px-2 py-2 whitespace-nowrap">
                 {{ item.user.name }}
             </td>
-            <td class="px-2 py-1 whitespace-nowrap">0000</td>
-            <td class="px-2 py-1 whitespace-nowrap">1111</td>
-            <td class="px-2 py-1 whitespace-nowrap">
+            <td class="px-2 py-2 whitespace-nowrap">
+                {{ item.user.employee_number }}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap">{{ item.user.ep_id }}</td>
+            <td class="px-2 py-2 whitespace-nowrap">
                 {{ timestampToDate(item.created_at).split(" ")[0] }}
             </td>
             <td class="px-2 py-1 whitespace-nowrap">
                 {{ item.product.name }}
             </td>
-            <td class="px-2 py-1">{{ item.used_coins }}</td>
-            <td class="px-2 py-1 font-semibold">{{ status(item.status) }}</td>
-            <td class="px-2 py-1 whitespace-nowrap">
+            <td class="px-2 py-2">{{ item.used_coins }}</td>
+            <td class="px-2 py-2 font-semibold">{{ status(item.status) }}</td>
+            <td class="px-2 py-2 whitespace-nowrap">
                 {{
                     item.completed_date
                         ? timestampToDate(item.completed_date).split(" ")[0]
                         : "-"
                 }}
             </td>
-            <td class="px-2 py-1">
+            <td class="px-2 py-2">
                 {{
                     item.cancel_request_date
                         ? timestampToDate(item.cancel_request_date).split(
@@ -37,25 +39,24 @@
                         : "-"
                 }}
             </td>
-            <td class="px-2 py-1">
-                <OutlineButton
+            <td class="px-2 py-2 whitespace-nowrap">
+                <WhiteButton
                     v-if="item.status === 'W'"
-                    class="px-2 text-sm"
+                    class="px-2 py-1 text-sm"
                     @click="onAgreeComplete(item.id)"
-                    >지급완료</OutlineButton
+                    >지급</WhiteButton
                 >
                 <WhiteButton
                     v-if="item.status === 'CW'"
-                    class="px-2 text-sm"
+                    class="px-2 py-1 text-sm"
                     @click="onAgreeCancel(item.id)"
-                    >취소승인</WhiteButton
+                    >승인</WhiteButton
                 >
             </td>
         </tr>
     </tbody>
 </template>
 <script setup>
-import OutlineButton from "@components/Button/OutlineButton.vue";
 import WhiteButton from "@components/Button/WhiteButton.vue";
 import { router } from "@inertiajs/vue3";
 import { useConverter } from "@utils/useConverter";
