@@ -2,7 +2,10 @@
     <Menu as="div" class="relative inline-block">
         <div>
             <MenuButton
-                class="inline-flex w-28 justify-between items-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                :class="[
+                    'inline-flex w-28 justify-between items-center gap-x-1.5 rounded-md bg-white px-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50',
+                    py ? py : 'py-[3px]',
+                ]"
                 @click="
                     (e) => {
                         e.stopPropagation();
@@ -67,6 +70,9 @@ const props = defineProps({
     },
     onSelect: {
         type: Function,
+    },
+    py: {
+        type: String,
     },
 });
 </script>
