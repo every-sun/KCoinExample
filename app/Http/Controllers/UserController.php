@@ -10,7 +10,24 @@ class UserController extends Controller
     public function index(){
         $users = User::paginate(20);
         return Inertia::render('Admin/User/Index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
+
+    public function show($id){
+        $user = User::findOrFail($id);
+
+        return Inertia::render('Admin/User/Show', [
+            'user' => $user
+        ]);
+    }
+
+    public function update($id, Request $request){
+        $item = User::findOrFail($id);
+        if ($request->has('role')) {
+            $item->role = $request->input('role');
+        }
+        $item->save();
+    }
+
 }

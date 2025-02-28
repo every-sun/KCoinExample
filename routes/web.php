@@ -49,6 +49,8 @@ Route::prefix('/admin/announcement')->group(function(){
 
 Route::prefix('/admin/user')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('/{id}', [UserController::class, 'show'])->name('admin.user.show');
+    Route::put('/{id}', [UserController::class, 'update'])->name('admin.user.update');
 });
 
 Route::prefix('/admin/inquiry')->group(function(){

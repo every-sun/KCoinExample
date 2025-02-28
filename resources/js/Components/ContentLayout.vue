@@ -1,40 +1,35 @@
 <template>
-    <div class="w-full flex bg-white min-h-[100vh]">
-        <div class="bg-white flex-1 0">
-            <div
-                class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300"
+    <div class="w-full">
+        <div class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300">
+            <p
+                class="font-semibold text-2xl mb-4"
+                v-if="
+                    pageStore.currentPage &&
+                    pageStore.currentTabIdx >= 0 &&
+                    tabs[pageStore.currentPage]
+                "
             >
-                <p
-                    class="font-semibold text-2xl mb-4"
-                    v-if="
-                        pageStore.currentPage &&
-                        pageStore.currentTabIdx >= 0 &&
-                        tabs[pageStore.currentPage]
-                    "
+                {{
+                    tabs[pageStore.currentPage][pageStore.currentTabIdx]?.title
+                }}
+            </p>
+            <div class="flex gap-8">
+                <Link
+                    v-for="(item, i) in tabs[pageStore.currentPage]"
+                    :href="item.url"
+                    :key="item.title"
+                    :class="[
+                        'border-b-4 cursor-pointer py-2',
+                        i === pageStore.currentTabIdx
+                            ? 'border-b-secondary text-secondary'
+                            : 'border-b-transparent',
+                    ]"
                 >
-                    {{
-                        tabs[pageStore.currentPage][pageStore.currentTabIdx]
-                            ?.title
-                    }}
-                </p>
-                <div class="flex gap-8">
-                    <Link
-                        v-for="(item, i) in tabs[pageStore.currentPage]"
-                        :href="item.url"
-                        :key="item.title"
-                        :class="[
-                            'border-b-4 cursor-pointer py-2',
-                            i === pageStore.currentTabIdx
-                                ? 'border-b-secondary text-secondary'
-                                : 'border-b-transparent',
-                        ]"
-                    >
-                        {{ item.title }}
-                    </Link>
-                </div>
+                    {{ item.title }}
+                </Link>
             </div>
-            <div class="px-10 py-10"><slot></slot></div>
         </div>
+        <div class="w-full px-10 py-10"><slot></slot></div>
     </div>
 </template>
 <script setup>

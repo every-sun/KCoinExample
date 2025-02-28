@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full">
         <Header :toggleHamburger="toggleHamburger"></Header>
         <div
             v-if="isDefault"
@@ -37,7 +37,7 @@
             <div
                 v-if="isHamburgerOn"
                 :class="[
-                    'flex flex-col w-[15%] bg-primary pt-[150px] px-6 pb-20',
+                    'flex flex-col flex-1 bg-primary pt-[150px] px-6 pb-20',
                 ]"
             >
                 <UserInfo :data="dummyData" />
@@ -49,7 +49,9 @@
             >
                 <IconMenus />
             </div>
-            <slot></slot>
+            <div :class="isHamburgerOn ? 'w-[85%]' : 'w-full'">
+                <slot></slot>
+            </div>
         </div>
     </div>
     <ConfirmModal />

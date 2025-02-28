@@ -14,7 +14,7 @@
             >
                 <div class="flex gap-2 items-center">
                     <label class="text-xs w-28">상품명</label>
-                    <FilterInput />
+                    <FilterInput placeholder="검색어를 입력하세요" />
                 </div>
                 <div class="flex gap-2 items-center">
                     <p class="text-xs w-28">코인</p>
@@ -24,7 +24,14 @@
                             <p>~</p>
                             <FilterNumberInput />
                         </div>
-                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
+                        <div>
+                            <OutlineButton class="text-xs px-8 py-1 mr-2"
+                                >초기화</OutlineButton
+                            >
+                            <FillButton class="text-xs px-8 py-1"
+                                >검색</FillButton
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,6 +83,7 @@
 </template>
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
+import OutlineButton from "@components/Button/OutlineButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";

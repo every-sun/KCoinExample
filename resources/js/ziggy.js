@@ -72,6 +72,16 @@ const Ziggy = {
             parameters: ["id"],
         },
         "admin.user.index": { uri: "admin/user", methods: ["GET", "HEAD"] },
+        "admin.user.show": {
+            uri: "admin/user/{id}",
+            methods: ["GET", "HEAD"],
+            parameters: ["id"],
+        },
+        "admin.user.update": {
+            uri: "admin/user/{id}",
+            methods: ["PUT"],
+            parameters: ["id"],
+        },
         "admin.inquiry.answer.store": {
             uri: "admin/inquiry/{inquiry_id}/answer",
             methods: ["POST"],
