@@ -12,24 +12,31 @@
                     <label class="text-xs w-28">내용</label>
                     <FilterInput />
                 </div>
-                <div class="flex gap-2 items-center">
-                    <p class="text-xs w-28">등록일</p>
-                    <div class="w-96 flex gap-2 items-center">
-                        <input
-                            type="date"
-                            class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
-                        />
-                        ~
-                        <input
-                            type="date"
-                            class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
-                        />
-                    </div>
-                </div>
+
                 <div class="flex gap-2 items-center">
                     <div class="flex-1 flex items-center justify-between">
-                        <div class="w-96 flex gap-2 items-center"></div>
-                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-xs w-28">등록일</p>
+                            <div class="w-96 flex gap-2 items-center">
+                                <input
+                                    type="date"
+                                    class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
+                                />
+                                ~
+                                <input
+                                    type="date"
+                                    class="flex-1 bg-white ring-gray-300 ring-1 rounded-sm text-xs px-2 py-1 focus:outline-none"
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <OutlineButton class="text-xs px-8 py-1 mr-2"
+                                >초기화</OutlineButton
+                            >
+                            <FillButton class="text-xs px-8 py-1"
+                                >검색</FillButton
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,6 +53,7 @@
 </template>
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
+import OutlineButton from "@components/Button/OutlineButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import FilterInput from "@components/FilterInput.vue";
 import Layout from "@components/Layout.vue";

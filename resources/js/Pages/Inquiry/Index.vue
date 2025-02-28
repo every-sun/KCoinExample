@@ -30,18 +30,25 @@
                         <label for="waiting" class="text-xs"> 답변 완료 </label>
                     </div>
                 </div>
-                <div class="flex gap-2 items-center">
-                    <p class="text-xs w-28">문의유형</p>
-                    <DropDown
-                        :items="inquiryTypes.map((e) => e.label)"
-                        :value="typeValue"
-                        :onSelect="onTypeSelect"
-                    />
-                </div>
+
                 <div class="flex gap-2 items-center">
                     <div class="flex-1 flex items-center justify-between">
-                        <div class="w-96 flex gap-2 items-center"></div>
-                        <FillButton class="text-xs px-8 py-1">검색</FillButton>
+                        <div class="flex gap-2 items-center">
+                            <p class="text-xs w-28">문의유형</p>
+                            <DropDown
+                                :items="inquiryTypes.map((e) => e.label)"
+                                :value="typeValue"
+                                :onSelect="onTypeSelect"
+                            />
+                        </div>
+                        <div>
+                            <OutlineButton class="text-xs px-8 py-1 mr-2"
+                                >초기화</OutlineButton
+                            >
+                            <FillButton class="text-xs px-8 py-1"
+                                >검색</FillButton
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,6 +64,7 @@
 </template>
 <script setup>
 import FillButton from "@components/Button/FillButton.vue";
+import OutlineButton from "@components/Button/OutlineButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import DropDown from "@components/DropDown.vue";
 import FilterInput from "@components/FilterInput.vue";
