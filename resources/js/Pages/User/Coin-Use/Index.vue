@@ -14,7 +14,7 @@
             >
                 <div class="flex gap-2 items-center">
                     <label class="text-xs w-28">상품명</label>
-                    <FilterInput />
+                    <FilterInput placeholder="검색어를 입력하세요" />
                 </div>
                 <div class="flex gap-2 items-center">
                     <p class="text-xs w-28">코인</p>

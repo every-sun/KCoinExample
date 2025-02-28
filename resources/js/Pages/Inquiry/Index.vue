@@ -5,28 +5,20 @@
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
             >
                 <div class="flex gap-2 items-center">
-                    <label class="text-xs w-28">제목</label>
-                    <FilterInput />
-                </div>
-                <div class="flex gap-2 items-center">
-                    <label class="text-xs w-28">내용</label>
-                    <FilterInput />
+                    <label class="text-xs w-28">제목/내용</label>
+                    <FilterInput placeholder="검색어를 입력하세요" />
                 </div>
 
                 <div class="flex items-center">
                     <p class="text-xs w-28">답변여부</p>
                     <div class="flex items-center gap-2 justify-center pl-2">
-                        <input
-                            type="radio"
-                            id="completed"
-                            name="answer"
-                            checked
-                        />
+                        <input type="radio" id="all" name="answer" checked />
+                        <label for="all" class="text-xs mr-6"> 전체 </label>
+                        <input type="radio" id="completed" name="answer" />
                         <label for="completed" class="text-xs mr-6">
                             답변 대기
                         </label>
                         <input type="radio" id="waiting" name="answer" />
-
                         <label for="waiting" class="text-xs"> 답변 완료 </label>
                     </div>
                 </div>

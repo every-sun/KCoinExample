@@ -3,6 +3,11 @@
         <div>
             <MenuButton
                 class="inline-flex w-28 justify-between items-center gap-x-1.5 rounded-md bg-white px-2 py-1.5 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                @click="
+                    (e) => {
+                        e.stopPropagation();
+                    }
+                "
             >
                 {{ value }}
                 <ChevronDownIcon
@@ -24,7 +29,15 @@
                 class="absolute right-0 z-10 mt-2 w-28 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
             >
                 <div class="py-1" v-for="item in items" :key="item">
-                    <MenuItem v-slot="{ active }" @click="onSelect(item)">
+                    <MenuItem
+                        v-slot="{ active }"
+                        @click="
+                            (e) => {
+                                e.stopPropagation();
+                                onSelect(item);
+                            }
+                        "
+                    >
                         <p
                             :class="[
                                 active

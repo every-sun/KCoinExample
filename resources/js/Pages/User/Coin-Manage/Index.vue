@@ -5,8 +5,8 @@
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
             >
                 <div class="flex gap-2 items-center">
-                    <label class="text-xs w-28">상품명</label>
-                    <FilterInput />
+                    <label class="text-xs w-28">제목/내용</label>
+                    <FilterInput placeholder="검색어를 입력하세요" />
                 </div>
                 <div class="flex gap-2 items-center">
                     <p class="text-xs w-28">신청날짜</p>
