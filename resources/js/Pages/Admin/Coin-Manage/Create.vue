@@ -1,240 +1,170 @@
 <template>
     <ContentLayout>
-        <div class="px-4 sm:px-6 lg:px-8">
-            <div class="sm:flex sm:items-center">
-                <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold text-gray-900">Users</h1>
-                    <p class="mt-2 text-sm text-gray-700">
-                        A list of all the users in your account including their
-                        name, title, email and role.
-                    </p>
-                </div>
-                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button
-                        type="button"
-                        class="block rounded-md bg-indigo-600 px-3 py-1.5 text-center text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Add user
-                    </button>
-                </div>
-            </div>
-            <div class="mt-8 flow-root">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="w-[50%]">
+            <div class="flex justify-between">
+                <p class="mt-2 text-sm text-gray-500">
+                    코인을 지급할 사용자를 선택해주세요.
+                </p>
+                <div class="flex gap-2 mb-4">
+                    <DropDown
+                        :items="sortOptions"
+                        :value="sortValue"
+                        :onSelect="onSort"
+                        py="py-3"
+                    />
                     <div
-                        class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+                        class="bg-white ring-gray-300 ring-1 rounded-sm pl-2 text-xs py-1 flex items-center"
                     >
-                        <div class="relative">
-                            <div
-                                v-if="selectedPeople.length > 0"
-                                class="absolute left-14 top-0 flex h-12 items-center space-x-3 bg-white sm:left-12"
-                            >
-                                <button
-                                    type="button"
-                                    class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
-                                >
-                                    Bulk edit
-                                </button>
-                                <button
-                                    type="button"
-                                    class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
-                                >
-                                    Delete all
-                                </button>
-                            </div>
-                            <table
-                                class="min-w-full table-fixed divide-y divide-gray-300"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th
-                                            scope="col"
-                                            class="relative px-7 sm:w-12 sm:px-6"
-                                        >
-                                            <div
-                                                class="group absolute left-4 top-1/2 -mt-2 grid size-4 grid-cols-1"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                                    :checked="
-                                                        indeterminate ||
-                                                        selectedPeople.length ===
-                                                            people.length
-                                                    "
-                                                    :indeterminate="
-                                                        indeterminate
-                                                    "
-                                                    @change="
-                                                        selectedPeople = $event
-                                                            .target.checked
-                                                            ? people.map(
-                                                                  (p) => p.email
-                                                              )
-                                                            : []
-                                                    "
-                                                />
-                                                <svg
-                                                    class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                                                    viewBox="0 0 14 14"
-                                                    fill="none"
-                                                >
-                                                    <path
-                                                        class="opacity-0 group-has-[:checked]:opacity-100"
-                                                        d="M3 8L6 11L11 3.5"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                    <path
-                                                        class="opacity-0 group-has-[:indeterminate]:opacity-100"
-                                                        d="M3 7H11"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Name
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Title
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Email
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Role
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="relative py-3.5 pl-3 pr-4 sm:pr-3"
-                                        >
-                                            <span class="sr-only">Edit</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody
-                                    class="divide-y divide-gray-200 bg-white"
-                                >
-                                    <tr
-                                        v-for="person in people"
-                                        :key="person.email"
-                                        :class="[
-                                            selectedPeople.includes(
-                                                person.email
-                                            ) && 'bg-gray-50',
-                                        ]"
-                                    >
-                                        <td
-                                            class="relative px-7 sm:w-12 sm:px-6"
-                                        >
-                                            <div
-                                                v-if="
-                                                    selectedPeople.includes(
-                                                        person.email
-                                                    )
-                                                "
-                                                class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
-                                            ></div>
-                                            <div
-                                                class="group absolute left-4 top-1/2 -mt-2 grid size-4 grid-cols-1"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                                    :value="person.email"
-                                                    v-model="selectedPeople"
-                                                />
-                                                <svg
-                                                    class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                                                    viewBox="0 0 14 14"
-                                                    fill="none"
-                                                >
-                                                    <path
-                                                        class="opacity-0 group-has-[:checked]:opacity-100"
-                                                        d="M3 8L6 11L11 3.5"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                    <path
-                                                        class="opacity-0 group-has-[:indeterminate]:opacity-100"
-                                                        d="M3 7H11"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </td>
-                                        <td
-                                            :class="[
-                                                'whitespace-nowrap py-4 pr-3 text-sm font-medium',
-                                                selectedPeople.includes(
-                                                    person.email
-                                                )
-                                                    ? 'text-indigo-600'
-                                                    : 'text-gray-900',
-                                            ]"
-                                        >
-                                            {{ person.name }}
-                                        </td>
-                                        <td
-                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                                        >
-                                            {{ person.title }}
-                                        </td>
-                                        <td
-                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                                        >
-                                            {{ person.email }}
-                                        </td>
-                                        <td
-                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                                        >
-                                            {{ person.role }}
-                                        </td>
-                                        <td
-                                            class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3"
-                                        >
-                                            <a
-                                                href="#"
-                                                class="text-indigo-600 hover:text-indigo-900"
-                                            >
-                                                Edit<span class="sr-only"
-                                                    >, {{ person.name }}</span
-                                                >
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <input class="focus:outline-none" />
+                        <button class="cursor-pointer px-2">
+                            <MagnifyingGlassIcon class="w-5" />
+                        </button>
                     </div>
                 </div>
             </div>
+            <table class="w-full divide-y divide-gray-300">
+                <thead>
+                    <tr>
+                        <th scope="col" class="relative sm:w-12 sm:px-6">
+                            <div
+                                class="group absolute left-4 top-1/2 -mt-2 grid size-4 grid-cols-1"
+                            >
+                                <input
+                                    type="checkbox"
+                                    class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                                    :checked="
+                                        indeterminate ||
+                                        selectedUsers.length ===
+                                            users.data.length
+                                    "
+                                    :indeterminate="indeterminate"
+                                    @change="
+                                        selectedUsers = $event.target.checked
+                                            ? users.data.map((e) => e.id)
+                                            : []
+                                    "
+                                />
+                                <svg
+                                    class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                                    viewBox="0 0 14 14"
+                                    fill="none"
+                                >
+                                    <path
+                                        class="opacity-0 group-has-[:checked]:opacity-100"
+                                        d="M3 8L6 11L11 3.5"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        class="opacity-0 group-has-[:indeterminate]:opacity-100"
+                                        d="M3 7H11"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </th>
+                        <th
+                            scope="col"
+                            class="py-3 text-left text-sm font-semibold text-gray-900"
+                            v-for="item in headers"
+                            :key="item"
+                        >
+                            {{ item }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                    <tr
+                        v-for="(item, i) in users.data"
+                        :key="item.id"
+                        :class="[
+                            selectedUsers.includes(item.id) && 'bg-gray-50',
+                        ]"
+                    >
+                        <td class="relative">
+                            <div
+                                class="group absolute left-4 top-1/2 -mt-2 grid size-4 grid-cols-1"
+                            >
+                                <input
+                                    type="checkbox"
+                                    class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-secondary checked:bg-secondary indeterminate:border-secondary indeterminate:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                                    :value="item.id"
+                                    v-model="selectedUsers"
+                                />
+                                <svg
+                                    class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                                    viewBox="0 0 14 14"
+                                    fill="none"
+                                >
+                                    <path
+                                        class="opacity-0 group-has-[:checked]:opacity-100"
+                                        d="M3 8L6 11L11 3.5"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        class="opacity-0 group-has-[:indeterminate]:opacity-100"
+                                        d="M3 7H11"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </td>
+                        <td class="px-1 py-3 text-sm text-gray-500">
+                            {{
+                                (users.current_page - 1) * users.per_page +
+                                i +
+                                1
+                            }}
+                        </td>
+                        <td
+                            class="whitespace-nowrap px-1 py-3 text-sm text-gray-500"
+                        >
+                            {{ item.employee_number }}
+                        </td>
+                        <td
+                            :class="[
+                                ' py-4 pr-3 text-sm font-medium',
+                                selectedUsers.includes(item.id)
+                                    ? 'text-secondary'
+                                    : 'text-gray-900',
+                            ]"
+                        >
+                            {{ item.name }}
+                        </td>
+                        <td
+                            class="whitespace-nowrap px-1 py-3 text-sm text-gray-500"
+                        >
+                            {{ item.ep_id }}
+                        </td>
+
+                        <td
+                            class="whitespace-nowrap px-1 py-3 text-sm text-gray-500"
+                        >
+                            {{ item.role === "admin" ? "관리자" : "일반" }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <FillButton class="p-2">코인 발행</FillButton>
     </ContentLayout>
 </template>
 <script setup>
+import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
+import DropDown from "@components/DropDown.vue";
 import Layout from "@components/Layout.vue";
+import { MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 import { useCurrentPageStore } from "@store/currentPage";
 import { computed, onMounted, ref } from "vue";
+
 defineOptions({
     layout: Layout,
 });
@@ -245,19 +175,27 @@ onMounted(() => {
     pageStore.setTabIdx(1);
 });
 
-const people = [
-    {
-        name: "Lindsay Walton",
-        title: "Front-end Developer",
-        email: "lindsay.walton@example.com",
-        role: "Member",
+const props = defineProps({
+    users: {
+        type: Object,
     },
-    // More people...
-];
-const selectedPeople = ref([]);
+});
+
+console.log(props.users);
+
+const sortOptions = ["EP ID", "사원번호", "사원명", "이메일"];
+const sortValue = ref(sortOptions[0]);
+
+const onSort = (v) => {
+    sortValue.value = v;
+};
+
+const selectedUsers = ref([]);
 const indeterminate = computed(
     () =>
-        selectedPeople.value.length > 0 &&
-        selectedPeople.value.length < people.length
+        selectedUsers.value.length > 0 &&
+        selectedUsers.value.length < props.users.data.length
 );
+
+const headers = ["No", "사원번호", "사원명", "EP ID", "권한"];
 </script>
