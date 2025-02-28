@@ -19,10 +19,15 @@ Route::get('/login', function (){
 })->name('login');
 
 Route::prefix('/user/k-coin')->group(function(){
+    Route::get('/', [CoinController::class, 'index'])->name('user.coin.index');
     Route::get('/manage', [CoinRequestController::class, 'userManageIndex'])->name('user.coin.manage.index'); 
-    Route::get('/use', [CoinRequestController::class, 'userUseIndex'])->name('user.coin.use.index'); 
+    Route::get('/use', [CoinRequestController::class, 'userUseIndex'])->name('user.coin.use.index');  
     Route::post('/use', [CoinRequestController::class, 'store'])->name('user.coin.use.store');
     Route::put('/use/{id}', [CoinRequestController::class, 'update'])->name('user.coin.use.update');
+});
+
+Route::prefix('/user/profile')->group(function(){
+    Route::get('/', [UserController::class, 'edit'])->name('user.profile.edit');
 });
 
 Route::prefix('/admin/k-coin')->group(function(){
@@ -46,6 +51,7 @@ Route::prefix('/admin/announcement')->group(function(){
     Route::put('/{id}', [AnnouncementController::class, 'update'])->name('admin.announcement.update');
     Route::delete('/{id}', [AnnouncementController::class, 'destroy'])->name('admin.announcement.destroy');
 });
+
 
 Route::prefix('/admin/user')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('admin.user.index');

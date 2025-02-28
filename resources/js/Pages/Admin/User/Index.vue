@@ -5,7 +5,6 @@
                 class="shadow-sm ring-1 ring-inset ring-gray-300 p-2 rounded-md flex flex-col gap-2 mb-4"
             >
                 <div class="flex gap-2 items-center">
-                    <!-- <label class="text-xs w-28">검색</label> -->
                     <DropDown
                         :items="sortOptions"
                         :value="sortValue"
@@ -69,7 +68,7 @@ defineOptions({
 
 onMounted(() => {
     const pageStore = useCurrentPageStore();
-    pageStore.setPage("admin-user");
+    pageStore.setPage("user-manage");
     pageStore.setTabIdx(0);
 });
 

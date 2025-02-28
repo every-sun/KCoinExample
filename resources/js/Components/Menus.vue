@@ -85,7 +85,7 @@ const menus = [
         role: "admin",
         url: route("admin.user.index"),
         icon: CircleStackIcon,
-        type: "admin-user",
+        type: "user-manage",
     },
 ];
 </script>

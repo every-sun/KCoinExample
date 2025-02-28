@@ -5,25 +5,25 @@
             v-for="(item, i) in data.data"
             :key="item.id"
         >
-            <td class="px-2 py-1">
+            <td class="px-2 py-2">
                 {{ (data.current_page - 1) * data.per_page + i + 1 }}
             </td>
             <td
-                class="px-2 py-1 hover:underline cursor-pointer"
+                class="px-2 py-2 hover:underline cursor-pointer"
                 @click="onItemClick(item.id)"
             >
                 {{ item.title }}
             </td>
-            <td class="px-2 py-1 whitespace-nowrap">
+            <td class="px-2 py-2 whitespace-nowrap">
                 {{ timestampToDate(item.created_at) }}
             </td>
-            <td class="px-2 py-1">관리자</td>
+            <td class="px-2 py-2">관리자</td>
             <td
                 v-if="isAdmin"
-                class="px-2 py-1 whitespace-nowrap flex gap-1 items-center justify-center"
+                class="px-2 py-2 whitespace-nowrap flex gap-1 items-center justify-center"
             >
                 <WhiteButton
-                    class="px-2 text-sm"
+                    class="px-2 py-1 text-sm"
                     @click="
                         () => {
                             onDelete(item.id);
@@ -31,7 +31,7 @@
                     "
                     >삭제</WhiteButton
                 >
-                <WhiteButton class="px-2 text-sm" @click="onEdit(item.id)"
+                <WhiteButton class="px-2 py-1 text-sm" @click="onEdit(item.id)"
                     >수정</WhiteButton
                 >
             </td>

@@ -14,6 +14,15 @@ class UserController extends Controller
         ]);
     }
 
+    
+    public function edit(){
+        $user = User::findOrFail(1);
+        return Inertia::render('User/Profile/Edit', [
+            'user' => $user,
+        ]);
+    }
+
+    
     public function show($id){
         $user = User::findOrFail($id);
 

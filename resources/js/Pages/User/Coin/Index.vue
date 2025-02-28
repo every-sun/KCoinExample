@@ -1,11 +1,11 @@
 <template>
-    <ContentLayout>사용자 상세 </ContentLayout>
+    <ContentLayout title="코인 적립 내역"></ContentLayout>
 </template>
 <script setup>
 import ContentLayout from "@components/ContentLayout.vue";
 import Layout from "@components/Layout.vue";
 import { useCurrentPageStore } from "@store/currentPage";
-import { inject, onMounted } from "vue";
+import { onMounted } from "vue";
 
 defineOptions({
     layout: Layout,
@@ -13,9 +13,6 @@ defineOptions({
 
 onMounted(() => {
     const pageStore = useCurrentPageStore();
-    pageStore.setPage("user-manage");
-    pageStore.setTabIdx(0);
+    pageStore.setPage("coin-history");
 });
-
-const route = inject("route");
 </script>

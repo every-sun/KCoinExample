@@ -1,9 +1,12 @@
 <template>
     <div class="w-full">
         <div class="bg-[#F3F4F8] pt-[150px] px-10 border-b-1 border-gray-300">
+            <p v-if="title" class="font-semibold text-2xl mb-4">
+                {{ title }}
+            </p>
             <p
                 class="font-semibold text-2xl mb-4"
-                v-if="
+                v-else-if="
                     pageStore.currentPage &&
                     pageStore.currentTabIdx >= 0 &&
                     tabs[pageStore.currentPage]
@@ -37,6 +40,10 @@ import { Link } from "@inertiajs/vue3";
 import { inject } from "vue";
 import { useCurrentPageStore } from "../store/currentPage";
 
+const props = defineProps({
+    title: String,
+});
+
 const pageStore = useCurrentPageStore();
 
 const route = inject("route");
@@ -52,6 +59,12 @@ const tabs = {
         {
             title: "K-Coin 관리",
             url: route("user.coin.manage.index"),
+        },
+    ],
+    "coin-history": [
+        {
+            title: "코인 적립 내역",
+            url: route("user.coin.index"),
         },
     ],
     inquiry: [
@@ -94,10 +107,16 @@ const tabs = {
             url: route("admin.coin.create"),
         },
     ],
-    "admin-user": [
+    "user-manage": [
         {
             title: "사용자 관리",
             url: route("admin.user.index"),
+        },
+    ],
+    "profile-edit": [
+        {
+            title: "프로필 관리",
+            url: route("user.profile.edit"),
         },
     ],
 };
