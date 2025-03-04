@@ -6,9 +6,9 @@
             :key="item.i"
             :preserve-scroll="isScrollPreserve"
             :class="[
-                ' px-1 rounded-md hover:bg-gray-100',
+                ' px-1 rounded-md',
                 currentPage === i
-                    ? `ring-2 ring-secondary text-button`
+                    ? `ring-1 ring-primary bg-primary text-white`
                     : 'ring-1 ring-gray-500',
             ]"
         >
