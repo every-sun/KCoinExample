@@ -89,7 +89,7 @@ const props = defineProps({
     inquiries: Object,
 });
 
-const isAdmin = true;
+const isAdmin = false;
 
 const typeValue = ref(inquiryTypes[0].label);
 

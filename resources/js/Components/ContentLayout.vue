@@ -48,7 +48,19 @@ const pageStore = useCurrentPageStore();
 
 const route = inject("route");
 
+const isAdmin = false;
+
 const tabs = {
+    "coin-request": [
+        {
+            title: "K-Coin 신청",
+            url: route("user.coin.request.create"),
+        },
+        {
+            title: "K-Coin 신청내역",
+            url: route("user.coin.request.index"),
+        },
+    ],
     "coin-use": [
         {
             title: "K-Coin 사용",
@@ -82,7 +94,7 @@ const tabs = {
             title: "공지사항",
             url: route("announcement.index"),
         },
-        {
+        isAdmin && {
             title: "공지사항 등록",
             url: route("admin.announcement.create"),
         },

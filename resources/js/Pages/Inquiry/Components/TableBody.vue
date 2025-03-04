@@ -60,7 +60,7 @@ const route = inject("route");
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();
 
-const isAdmin = true;
+const isAdmin = false;
 
 const typeOptions = [
     { label: "K-Coin문의", value: "A" },

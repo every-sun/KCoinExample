@@ -57,7 +57,7 @@ const route = inject("route");
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();
 
-const isAdmin = true;
+const isAdmin = false;
 
 const onDelete = (id) => {
     confirmModalStore.init({

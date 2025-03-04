@@ -37,6 +37,8 @@ const store = useCurrentPageStore();
 
 const route = inject("route");
 
+const isAdmin = false;
+
 const menus = [
     {
         label: "K-Coin 사용",
@@ -44,6 +46,13 @@ const menus = [
         url: route("user.coin.use.index"),
         icon: CurrencyDollarIcon,
         type: "coin-use",
+    },
+    {
+        label: "K-Coin 신청",
+        role: "user",
+        url: route("user.coin.request.create"),
+        icon: CurrencyDollarIcon,
+        type: "coin-request",
     },
     {
         label: "K-Coin 관리",
@@ -66,26 +75,31 @@ const menus = [
         icon: BellIcon,
         type: "announcement",
     },
-    {
-        label: "상품 관리",
-        role: "admin",
-        url: route("admin.product.index"),
-        icon: ComputerDesktopIcon,
-        type: "product-manage",
-    },
-    {
-        label: "K-Coin 관리",
-        role: "admin",
-        url: route("admin.coin.index"),
-        icon: CircleStackIcon,
-        type: "admin-coin-manage",
-    },
-    {
-        label: "사용자 관리",
-        role: "admin",
-        url: route("admin.user.index"),
-        icon: CircleStackIcon,
-        type: "user-manage",
-    },
-];
+].concat(
+    isAdmin
+        ? [
+              {
+                  label: "상품 관리",
+                  role: "admin",
+                  url: route("admin.product.index"),
+                  icon: ComputerDesktopIcon,
+                  type: "product-manage",
+              },
+              {
+                  label: "K-Coin 관리",
+                  role: "admin",
+                  url: route("admin.coin.index"),
+                  icon: CircleStackIcon,
+                  type: "admin-coin-manage",
+              },
+              {
+                  label: "사용자 관리",
+                  role: "admin",
+                  url: route("admin.user.index"),
+                  icon: CircleStackIcon,
+                  type: "user-manage",
+              },
+          ]
+        : []
+);
 </script>

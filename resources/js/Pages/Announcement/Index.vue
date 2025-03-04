@@ -83,7 +83,7 @@ const props = defineProps({
     },
 });
 
-const isAdmin = true;
+const isAdmin = false;
 
 const headers = isAdmin
     ? ["No", "제목", "등록일", "작성자", "", ""]

@@ -42,11 +42,11 @@
                 </div>
             </div>
             <Table :headers="headers"
-                ><TableBody :data="coin_requests"
+                ><TableBody :data="coin_use_requests"
             /></Table>
             <PageController
-                :links="coin_requests.links"
-                :currentPage="coin_requests.current_page"
+                :links="coin_use_requests.links"
+                :currentPage="coin_use_requests.current_page"
                 :isScrollPreserve="true"
             />
         </div>
@@ -76,7 +76,7 @@ onMounted(() => {
 });
 
 const props = defineProps({
-    coin_requests: {
+    coin_use_requests: {
         type: Object,
     },
 });

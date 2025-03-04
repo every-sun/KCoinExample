@@ -69,7 +69,7 @@
                 <p>{{ item.content }}</p>
             </div>
         </div>
-        <AnswerForm :id="inquiry.id" />
+        <AnswerForm :id="inquiry.id" v-if="isAdmin" />
     </ContentLayout>
 </template>
 <script setup>
@@ -102,6 +102,8 @@ const props = defineProps({
         requried: true,
     },
 });
+
+const isAdmin = false;
 
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();

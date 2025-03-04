@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CoinUseRequestController;
 use App\Http\Controllers\CoinRequestController;
 use App\Http\Controllers\UserController;
 use Inertia\Inertia;
@@ -20,10 +21,20 @@ Route::get('/login', function (){
 
 Route::prefix('/user/k-coin')->group(function(){
     Route::get('/', [CoinController::class, 'index'])->name('user.coin.index');
-    Route::get('/manage', [CoinRequestController::class, 'userManageIndex'])->name('user.coin.manage.index'); 
-    Route::get('/use', [CoinRequestController::class, 'userUseIndex'])->name('user.coin.use.index');  
-    Route::post('/use', [CoinRequestController::class, 'store'])->name('user.coin.use.store');
-    Route::put('/use/{id}', [CoinRequestController::class, 'update'])->name('user.coin.use.update');
+    
+
+    Route::controller(CoinRequestController::class)->prefix('/request')->group(function(){
+        Route::get('/','userIndex')->name('user.coin.request.index');
+        Route::get('/create', 'create')->name('user.coin.request.create');
+        Route::post('/', 'store')->name('user.coin.request.store');
+    });
+
+    
+    Route::get('/manage', [CoinUseRequestController::class, 'userManageIndex'])->name('user.coin.manage.index'); 
+    
+    Route::get('/use', [CoinUseRequestController::class, 'userUseIndex'])->name('user.coin.use.index');  
+    Route::post('/use', [CoinUseRequestController::class, 'store'])->name('user.coin.use.store');
+    Route::put('/use/{id}', [CoinUseRequestController::class, 'update'])->name('user.coin.use.update');
 });
 
 Route::prefix('/user/profile')->group(function(){
@@ -31,9 +42,9 @@ Route::prefix('/user/profile')->group(function(){
 });
 
 Route::prefix('/admin/k-coin')->group(function(){
-    Route::get('/', [CoinRequestController::class, 'adminManageIndex'])->name('admin.coin.index');
+    Route::get('/', [CoinUseRequestController::class, 'adminManageIndex'])->name('admin.coin.index');
     Route::get('/create', [CoinController::class, 'create'])->name('admin.coin.create');  
-    Route::post('/store', [CoinController::class, 'store'])->name('admin.coin.store');  
+    Route::post('/', [CoinController::class, 'store'])->name('admin.coin.store');  
 });
 
 Route::prefix('/admin/product')->group(function(){
