@@ -186,6 +186,7 @@ import Layout from "@components/Layout.vue";
 import ShowModal from "@components/Modal/ShowModal.vue";
 import PageController from "@components/PageController.vue";
 import { router } from "@inertiajs/vue3";
+import { useAlertModalStore } from "@store/alertModal";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
 import { inject, onMounted, ref, watch } from "vue";
@@ -214,6 +215,7 @@ const props = defineProps({
 });
 
 const confirmModalStore = useConfirmModalStore();
+const alertModalStore = useAlertModalStore();
 
 const filterData = ref({
     keyword: null,
@@ -260,11 +262,10 @@ const onClick = (v, e) => {
                 },
                 {
                     onSuccess: () => {
-                        confirmModalStore.init({
-                            text: "사용신청하였습니다.",
-                            func: () => {},
+                        alertModalStore.init({
+                            text: "사용신청을 하였습니다.",
                         });
-                        confirmModalStore.open();
+                        alertModalStore.open();
                     },
                 }
             );

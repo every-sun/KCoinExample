@@ -21,7 +21,9 @@ import {
     CircleStackIcon,
     ComputerDesktopIcon,
     CurrencyDollarIcon,
+    GiftIcon,
     QuestionMarkCircleIcon,
+    UserIcon,
 } from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 import { useCurrentPageStore } from "@store/currentPage";
@@ -44,7 +46,7 @@ const menus = [
         label: "K-Coin 사용",
         role: "user",
         url: route("user.coin.use.index"),
-        icon: CurrencyDollarIcon,
+        icon: GiftIcon,
         type: "coin-use",
     },
     {
@@ -96,7 +98,7 @@ const menus = [
                   label: "사용자 관리",
                   role: "admin",
                   url: route("admin.user.index"),
-                  icon: CircleStackIcon,
+                  icon: UserIcon,
                   type: "user-manage",
               },
           ]

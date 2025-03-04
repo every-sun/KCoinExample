@@ -55,6 +55,7 @@
         </div>
     </div>
     <ConfirmModal />
+    <AlertModal />
 </template>
 <script setup>
 import ConfirmModal from "@components/Modal/ConfirmModal.vue";
@@ -63,6 +64,7 @@ import { computed, ref } from "vue";
 import Header from "./Header.vue";
 import IconMenus from "./IconMenus.vue";
 import Menus from "./Menus.vue";
+import AlertModal from "./Modal/AlertModal.vue";
 import UserInfo from "./UserInfo.vue";
 
 const pageStore = useCurrentPageStore();

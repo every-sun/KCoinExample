@@ -40,6 +40,8 @@ import FillButton from "@components/Button/FillButton.vue";
 import ContentLayout from "@components/ContentLayout.vue";
 import Layout from "@components/Layout.vue";
 import { useForm } from "@inertiajs/vue3";
+import { useAlertModalStore } from "@store/alertModal";
+import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
 import { inject, onMounted } from "vue";
 
@@ -55,12 +57,28 @@ onMounted(() => {
 
 const route = inject("route");
 
+const confirmModalStore = useConfirmModalStore();
+const alertModalStore = useAlertModalStore();
+
 const form = useForm({
     title: "",
     content: "",
 });
 
 const onSubmit = () => {
-    form.post(route("user.coin.request.store"));
+    confirmModalStore.init({
+        text: `K-Coin을 신청하시겠습니까?`,
+        func: () => {
+            form.post(route("user.coin.request.store"), {
+                onSuccess: () => {
+                    alertModalStore.init({
+                        text: "K-Coin을 신청하였습니다.",
+                    });
+                    alertModalStore.open();
+                },
+            });
+        },
+    });
+    confirmModalStore.open();
 };
 </script>
