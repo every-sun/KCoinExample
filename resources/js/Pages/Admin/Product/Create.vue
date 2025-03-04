@@ -54,7 +54,7 @@
                         >
                         <div class="flex items-center gap-2">
                             <div
-                                v-for="item in categories"
+                                v-for="item in productCategories"
                                 :key="item.id"
                                 class="flex items-center gap-1"
                             >
@@ -110,6 +110,7 @@ import Layout from "@components/Layout.vue";
 import { router, useForm } from "@inertiajs/vue3";
 import { useCurrentPageStore } from "@store/currentPage";
 import { inject, onMounted } from "vue";
+import { productCategories } from "../../../utils/data";
 
 defineOptions({
     layout: Layout,
@@ -130,17 +131,6 @@ const props = defineProps({
 });
 
 const isEdit = props.product !== undefined;
-
-const categories = [
-    {
-        id: "all",
-        label: "전체",
-    },
-    { id: "voucher", label: "상품권" },
-    { id: "cafe", label: "카페" },
-    { id: "food", label: "식품" },
-    { id: "electronics", label: "전자제품" },
-];
 
 const form = useForm(
     isEdit

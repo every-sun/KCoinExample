@@ -24,8 +24,12 @@ class CoinUseRequestController extends Controller
         ]);
     }
 
-    public function userUseIndex(){
-        $products = Product::orderByDesc('created_at')->paginate(20);
+    public function userUseIndex(Request $request){
+        $query = Product::orderByDesc('created_at');
+        if($request->filled('category')){
+            $query->where('category', $request->category);
+        }   
+        $products = $query->paginate(20);
         return Inertia::render('User/Coin-Use/Index', [
             'products'=>$products
         ]);
@@ -49,19 +53,19 @@ class CoinUseRequestController extends Controller
 
     public function update($id, Request $request){ 
         $item = CoinUseRequest::findOrFail($id);  
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             $item->status = $request->input('status');
         }
 
-        if ($request->has('cancel_request_date')) {
+        if ($request->filled('cancel_request_date')) {
             $item->cancel_request_date = $request->input('cancel_request_date');
         }
 
-        if ($request->has('cancel_complete_date')) {
+        if ($request->filled('cancel_complete_date')) {
             $item->cancel_complete_date = $request->input('cancel_complete_date');
         }
 
-        if ($request->has('completed_date')) {
+        if ($request->filled('completed_date')) {
             $item->completed_date = $request->input('completed_date');
         }
         $item->save();

@@ -48,26 +48,21 @@
             </div>
             <div class="flex gap-2 mb-5">
                 <button
-                    v-for="item in [
-                        '전체',
-                        '상품권',
-                        '카페',
-                        '식품',
-                        '전자제품',
+                    v-for="item in productCategories"
+                    :key="item.id"
+                    :class="[
+                        ' text-sm px-2 py-1 rounded-xl',
+                        (!filterData.category && item.id === 'all') ||
+                        filterData.category === item.label
+                            ? 'bg-primary text-white'
+                            : 'bg-basic-gray text-black',
                     ]"
-                    :key="item"
-                    class="bg-basic-gray text-[black] text-sm px-2 py-1 rounded-xl"
+                    @click="filterByCategory(item.label)"
                 >
-                    {{ item }}
+                    {{ item.label }}
                 </button>
             </div>
             <div class="grid-cols-5 grid gap-6">
-                <!-- <div
-                    v-for="item in products.data"
-                    :key="item.id"
-                    class="ring-1 ring-gray-100 shadow shadow-gray-300 rounded-md p-2 cursor-pointer relative overflow-hidden"
-                    @click="onDetail(item)"
-                > -->
                 <div
                     v-for="item in products.data"
                     :key="item.id"
@@ -193,7 +188,8 @@ import PageController from "@components/PageController.vue";
 import { router } from "@inertiajs/vue3";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
-import { inject, onMounted, ref } from "vue";
+import { inject, onMounted, ref, watch } from "vue";
+import { productCategories } from "../../../utils/data";
 
 defineOptions({
     layout: Layout,
@@ -219,10 +215,32 @@ const props = defineProps({
 
 const confirmModalStore = useConfirmModalStore();
 
+const filterData = ref({
+    keyword: null,
+    minCoin: null,
+    maxCoin: null,
+    category: null,
+});
+
 const showProduct = ref(null);
 
 const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
 const sortValue = ref(sortOptions[0]);
+
+watch(
+    () => filterData.value.category,
+    (newCategory) => {
+        router.get(
+            route("user.coin.use.index"),
+            { category: newCategory },
+            { preserveState: true }
+        );
+    }
+);
+
+const filterByCategory = (v) => {
+    filterData.value.category = v;
+};
 
 const onSort = (v) => {
     sortValue.value = v;
