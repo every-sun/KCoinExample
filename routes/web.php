@@ -33,6 +33,7 @@ Route::prefix('/user/profile')->group(function(){
 Route::prefix('/admin/k-coin')->group(function(){
     Route::get('/', [CoinRequestController::class, 'adminManageIndex'])->name('admin.coin.index');
     Route::get('/create', [CoinController::class, 'create'])->name('admin.coin.create');  
+    Route::post('/store', [CoinController::class, 'store'])->name('admin.coin.store');  
 });
 
 Route::prefix('/admin/product')->group(function(){

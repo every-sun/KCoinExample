@@ -205,6 +205,7 @@ const onClick = (v, e) => {
                 {
                     product_id: v.id,
                     used_coins: v.price,
+                    description: v.name,
                 },
                 {
                     onSuccess: () => {

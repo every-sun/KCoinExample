@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\CoinRequest;
 use App\Models\Product;
+use App\Models\Coin;
 
 class CoinRequestController extends Controller
 {
@@ -33,6 +34,17 @@ class CoinRequestController extends Controller
     // 코인 사용
     public function store(Request $request){ 
         $item = CoinRequest::create($request->all());
+        
+        $type = "M";
+        $amount = $request->input('used_coins');
+        $description = $request->input('description');
+        Coin::create([
+            'type' => $type,       
+            'amount' => $amount,       
+            'description' => $description, 
+            'user_id' => 1,    
+        ]);
+
     }
 
     public function update($id, Request $request){ 

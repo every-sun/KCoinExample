@@ -26,6 +26,7 @@ const Ziggy = {
             uri: "admin/k-coin/create",
             methods: ["GET", "HEAD"],
         },
+        "admin.coin.store": { uri: "admin/k-coin/store", methods: ["POST"] },
         "admin.product.create": {
             uri: "admin/product/create",
             methods: ["GET", "HEAD"],
