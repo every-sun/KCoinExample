@@ -7,7 +7,7 @@
                 <Bars3Icon class="w-8" />
             </button>
             <button class="cursor-pointer" @click="router.visit('/')">
-                로고
+                <img src="@images/logo.png" alt="logo" class="w-20" />
             </button>
         </div>
         <div class="flex gap-5 justify-between items-center">

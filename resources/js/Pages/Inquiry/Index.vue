@@ -89,7 +89,7 @@ const props = defineProps({
     inquiries: Object,
 });
 
-const isAdmin = false;
+const isAdmin = window.localStorage.getItem("role") === "admin";
 
 const typeValue = ref(inquiryTypes[0].label);
 

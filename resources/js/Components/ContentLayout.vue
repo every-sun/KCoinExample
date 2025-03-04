@@ -48,7 +48,7 @@ const pageStore = useCurrentPageStore();
 
 const route = inject("route");
 
-const isAdmin = false;
+const isAdmin = window.localStorage.getItem("role") === "admin";
 
 const tabs = {
     "coin-request": [

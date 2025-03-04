@@ -60,7 +60,7 @@ const route = inject("route");
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();
 
-const isAdmin = false;
+const isAdmin = window.localStorage.getItem("role") === "admin";
 
 const typeOptions = [
     { label: "K-Coin문의", value: "A" },

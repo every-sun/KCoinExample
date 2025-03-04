@@ -103,7 +103,7 @@ const props = defineProps({
     },
 });
 
-const isAdmin = false;
+const isAdmin = window.localStorage.getItem("role") === "admin";
 
 const confirmModalStore = useConfirmModalStore();
 const { timestampToDate } = useConverter();

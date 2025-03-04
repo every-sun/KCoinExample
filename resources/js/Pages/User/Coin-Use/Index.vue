@@ -48,10 +48,16 @@
             </div>
 
             <div class="grid-cols-5 grid gap-6">
-                <div
+                <!-- <div
                     v-for="item in products.data"
                     :key="item.id"
                     class="ring-1 ring-gray-100 shadow shadow-gray-300 rounded-md p-2 cursor-pointer relative overflow-hidden"
+                    @click="onDetail(item)"
+                > -->
+                <div
+                    v-for="item in products.data"
+                    :key="item.id"
+                    class="rounded-md p-2 cursor-pointer relative overflow-hidden"
                     @click="onDetail(item)"
                 >
                     <p class="text-sm font-semibold truncate">
