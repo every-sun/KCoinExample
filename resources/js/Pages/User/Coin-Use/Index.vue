@@ -46,21 +46,42 @@
                     :onSelect="onSort"
                 />
             </div>
-
+            <div class="flex gap-2 mb-5">
+                <button
+                    v-for="item in productCategories"
+                    :key="item.id"
+                    :class="[
+                        ' text-sm px-2 py-1 rounded-xl',
+                        (!filterData.category && item.id === 'all') ||
+                        filterData.category === item.label
+                            ? 'bg-primary text-white'
+                            : 'bg-basic-gray text-black',
+                    ]"
+                    @click="filterByCategory(item.label)"
+                >
+                    {{ item.label }}
+                </button>
+            </div>
             <div class="grid-cols-5 grid gap-6">
                 <div
                     v-for="item in products.data"
                     :key="item.id"
-                    class="ring-1 ring-gray-100 shadow shadow-gray-300 rounded-md p-2 cursor-pointer relative overflow-hidden"
+                    class="ring-1 ring-gray-100 rounded-md p-2 cursor-pointer relative overflow-hidden"
                     @click="onDetail(item)"
                 >
                     <p class="text-sm font-semibold truncate">
                         {{ item.name }}
                     </p>
+                    <img
+                        v-if="item.image_url"
+                        :src="item.image_url"
+                        class="h-30 mx-auto my-2"
+                    />
                     <div
-                        class="bg-gray-200 h-24 flex items-center justify-center"
+                        v-else
+                        class="bg-gray-200 my-2 h-30 flex items-center justify-center"
                     >
-                        IMAGE
+                        NO IMAGE
                     </div>
                     <p class="text-xs truncate">
                         {{ item.description }}
@@ -88,11 +109,18 @@
 
     <ShowModal v-if="showProduct !== null" :onClose="closeDetail"
         ><div>
+            <img
+                v-if="showProduct.image_url"
+                :src="showProduct.image_url"
+                class="h-[300px] mx-auto my-2"
+            />
             <div
-                class="w-full h-[300px] bg-gray-200 flex items-center justify-center"
+                v-else
+                class="bg-gray-200 my-2 h-[300px] flex items-center justify-center"
             >
-                IMAGE
+                NO IMAGE
             </div>
+
             <div class="border-1 my-5 border-gray-400">
                 <div class="border-b-1 flex border-gray-400">
                     <p
@@ -158,9 +186,11 @@ import Layout from "@components/Layout.vue";
 import ShowModal from "@components/Modal/ShowModal.vue";
 import PageController from "@components/PageController.vue";
 import { router } from "@inertiajs/vue3";
+import { useAlertModalStore } from "@store/alertModal";
 import { useConfirmModalStore } from "@store/confilrModal";
 import { useCurrentPageStore } from "@store/currentPage";
-import { inject, onMounted, ref } from "vue";
+import { inject, onMounted, ref, watch } from "vue";
+import { productCategories } from "../../../utils/data";
 
 defineOptions({
     layout: Layout,
@@ -185,11 +215,34 @@ const props = defineProps({
 });
 
 const confirmModalStore = useConfirmModalStore();
+const alertModalStore = useAlertModalStore();
+
+const filterData = ref({
+    keyword: null,
+    minCoin: null,
+    maxCoin: null,
+    category: null,
+});
 
 const showProduct = ref(null);
 
 const sortOptions = ["최신순", "낮은 가격순", "높은 가격순"];
 const sortValue = ref(sortOptions[0]);
+
+watch(
+    () => filterData.value.category,
+    (newCategory) => {
+        router.get(
+            route("user.coin.use.index"),
+            { category: newCategory },
+            { preserveState: true }
+        );
+    }
+);
+
+const filterByCategory = (v) => {
+    filterData.value.category = v;
+};
 
 const onSort = (v) => {
     sortValue.value = v;
@@ -205,14 +258,14 @@ const onClick = (v, e) => {
                 {
                     product_id: v.id,
                     used_coins: v.price,
+                    description: v.name,
                 },
                 {
                     onSuccess: () => {
-                        confirmModalStore.init({
-                            text: "사용신청하였습니다.",
-                            func: () => {},
+                        alertModalStore.init({
+                            text: "사용신청을 하였습니다.",
                         });
-                        confirmModalStore.open();
+                        alertModalStore.open();
                     },
                 }
             );

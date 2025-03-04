@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function update($id, Request $request){
         $item = User::findOrFail($id);
-        if ($request->has('role')) {
+        if ($request->filled('role')) {
             $item->role = $request->input('role');
         }
         $item->save();

@@ -43,7 +43,7 @@
                 <div
                     v-for="item in products.data"
                     :key="item.id"
-                    class="ring-1 ring-gray-100 shadow shadow-gray-300 rounded-md p-2 cursor-pointer relative overflow-hidden"
+                    class="ring-1 ring-gray-100 rounded-md p-2 cursor-pointer relative overflow-hidden"
                     @click="onItemClick(item)"
                 >
                     <div class="flex justify-between items-center">
@@ -58,10 +58,16 @@
                             <XMarkIcon class="size-6" />
                         </button>
                     </div>
+                    <img
+                        v-if="item.image_url"
+                        :src="item.image_url"
+                        class="h-30 mx-auto my-2"
+                    />
                     <div
-                        class="bg-gray-200 h-24 flex items-center justify-center"
+                        v-else
+                        class="bg-gray-200 my-2 h-30 flex items-center justify-center"
                     >
-                        IMAGE
+                        NO IMAGE
                     </div>
                     <p class="text-xs truncate">
                         {{ item.description }}

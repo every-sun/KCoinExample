@@ -21,7 +21,9 @@ import {
     CircleStackIcon,
     ComputerDesktopIcon,
     CurrencyDollarIcon,
+    GiftIcon,
     QuestionMarkCircleIcon,
+    UserIcon,
 } from "@heroicons/vue/24/outline";
 import { Link } from "@inertiajs/vue3";
 import { useCurrentPageStore } from "@store/currentPage";
@@ -37,13 +39,22 @@ const store = useCurrentPageStore();
 
 const route = inject("route");
 
+const isAdmin = window.localStorage.getItem("role") === "admin";
+
 const menus = [
     {
         label: "K-Coin 사용",
         role: "user",
         url: route("user.coin.use.index"),
-        icon: CurrencyDollarIcon,
+        icon: GiftIcon,
         type: "coin-use",
+    },
+    {
+        label: "K-Coin 신청",
+        role: "user",
+        url: route("user.coin.request.create"),
+        icon: CurrencyDollarIcon,
+        type: "coin-request",
     },
     {
         label: "K-Coin 관리",
@@ -66,26 +77,31 @@ const menus = [
         icon: BellIcon,
         type: "announcement",
     },
-    {
-        label: "상품 관리",
-        role: "admin",
-        url: route("admin.product.index"),
-        icon: ComputerDesktopIcon,
-        type: "product-manage",
-    },
-    {
-        label: "K-Coin 관리",
-        role: "admin",
-        url: route("admin.coin.index"),
-        icon: CircleStackIcon,
-        type: "admin-coin-manage",
-    },
-    {
-        label: "사용자 관리",
-        role: "admin",
-        url: route("admin.user.index"),
-        icon: CircleStackIcon,
-        type: "user-manage",
-    },
-];
+].concat(
+    isAdmin
+        ? [
+              {
+                  label: "상품 관리",
+                  role: "admin",
+                  url: route("admin.product.index"),
+                  icon: ComputerDesktopIcon,
+                  type: "product-manage",
+              },
+              {
+                  label: "K-Coin 관리",
+                  role: "admin",
+                  url: route("admin.coin.index"),
+                  icon: CircleStackIcon,
+                  type: "admin-coin-manage",
+              },
+              {
+                  label: "사용자 관리",
+                  role: "admin",
+                  url: route("admin.user.index"),
+                  icon: UserIcon,
+                  type: "user-manage",
+              },
+          ]
+        : []
+);
 </script>

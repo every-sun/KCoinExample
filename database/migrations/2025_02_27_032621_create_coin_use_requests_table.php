@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coin_requests', function (Blueprint $table) {
+        Schema::create('coin_use_requests', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coin_requests');
+        Schema::dropIfExists('coin_use_requests');
     }
 };
  

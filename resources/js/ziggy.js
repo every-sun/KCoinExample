@@ -6,6 +6,18 @@ const Ziggy = {
         home: { uri: "/", methods: ["GET", "HEAD"] },
         login: { uri: "login", methods: ["GET", "HEAD"] },
         "user.coin.index": { uri: "user/k-coin", methods: ["GET", "HEAD"] },
+        "user.coin.request.index": {
+            uri: "user/k-coin/request",
+            methods: ["GET", "HEAD"],
+        },
+        "user.coin.request.create": {
+            uri: "user/k-coin/request/create",
+            methods: ["GET", "HEAD"],
+        },
+        "user.coin.request.store": {
+            uri: "user/k-coin/request",
+            methods: ["POST"],
+        },
         "user.coin.manage.index": {
             uri: "user/k-coin/manage",
             methods: ["GET", "HEAD"],
@@ -26,6 +38,7 @@ const Ziggy = {
             uri: "admin/k-coin/create",
             methods: ["GET", "HEAD"],
         },
+        "admin.coin.store": { uri: "admin/k-coin", methods: ["POST"] },
         "admin.product.create": {
             uri: "admin/product/create",
             methods: ["GET", "HEAD"],
