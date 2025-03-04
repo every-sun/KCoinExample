@@ -13,7 +13,7 @@
                 v-for="item in data"
                 :key="item.label"
             >
-                <span class="text-[#9EA9C3]">
+                <span class="text-basic-gray">
                     {{ item.label }}
                 </span>
                 <span class="text-white">

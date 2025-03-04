@@ -1,7 +1,7 @@
 <template>
     <ContentLayout>
-        <div class="w-full flex gap-4 items-center">
-            <div class="w-[50%]">
+        <div class="w-full flex gap-10 items-center justify-between">
+            <div class="flex-1">
                 <div class="flex justify-between">
                     <p class="mt-2 text-sm text-gray-500">
                         코인을 발행할 사용자를 선택해주세요.
@@ -160,7 +160,7 @@
                     :isScrollPreserve="true"
                 />
             </div>
-            <form class="flex-1 w-[30%]" @submit.prevent="onClick">
+            <form class="flex-1" @submit.prevent="onClick">
                 <label class="text-xs"> 발행코인 </label>
                 <input
                     type="number"

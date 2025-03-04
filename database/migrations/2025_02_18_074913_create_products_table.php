@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('price');
             $table->string('image_url')->nullable();
-            $table->string('status');
+            $table->string('category')->nullable();
         });
     }
 

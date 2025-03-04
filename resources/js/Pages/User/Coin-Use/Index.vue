@@ -46,7 +46,21 @@
                     :onSelect="onSort"
                 />
             </div>
-
+            <div class="flex gap-2 mb-5">
+                <button
+                    v-for="item in [
+                        '전체',
+                        '상품권',
+                        '카페',
+                        '식품',
+                        '전자제품',
+                    ]"
+                    :key="item"
+                    class="bg-basic-gray text-[black] text-sm px-2 py-1 rounded-xl"
+                >
+                    {{ item }}
+                </button>
+            </div>
             <div class="grid-cols-5 grid gap-6">
                 <!-- <div
                     v-for="item in products.data"
@@ -57,16 +71,22 @@
                 <div
                     v-for="item in products.data"
                     :key="item.id"
-                    class="rounded-md p-2 cursor-pointer relative overflow-hidden"
+                    class="ring-1 ring-gray-100 rounded-md p-2 cursor-pointer relative overflow-hidden"
                     @click="onDetail(item)"
                 >
                     <p class="text-sm font-semibold truncate">
                         {{ item.name }}
                     </p>
+                    <img
+                        v-if="item.image_url"
+                        :src="item.image_url"
+                        class="h-30 mx-auto my-2"
+                    />
                     <div
-                        class="bg-gray-200 h-24 flex items-center justify-center"
+                        v-else
+                        class="bg-gray-200 my-2 h-30 flex items-center justify-center"
                     >
-                        IMAGE
+                        NO IMAGE
                     </div>
                     <p class="text-xs truncate">
                         {{ item.description }}
@@ -94,11 +114,18 @@
 
     <ShowModal v-if="showProduct !== null" :onClose="closeDetail"
         ><div>
+            <img
+                v-if="showProduct.image_url"
+                :src="showProduct.image_url"
+                class="h-[300px] mx-auto my-2"
+            />
             <div
-                class="w-full h-[300px] bg-gray-200 flex items-center justify-center"
+                v-else
+                class="bg-gray-200 my-2 h-[300px] flex items-center justify-center"
             >
-                IMAGE
+                NO IMAGE
             </div>
+
             <div class="border-1 my-5 border-gray-400">
                 <div class="border-b-1 flex border-gray-400">
                     <p
