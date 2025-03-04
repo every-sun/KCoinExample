@@ -95,7 +95,7 @@
                                 onClick(item, e);
                             }
                         "
-                        :class="'w-full text-sm rounded-none'"
+                        :class="'w-full text-sm rounded-none '"
                         >신청</FillButton
                     >
                 </div>
@@ -234,7 +234,7 @@ watch(
     (newCategory) => {
         router.get(
             route("user.coin.use.index"),
-            { category: newCategory },
+            { category: newCategory === "전체" ? null : newCategory },
             { preserveState: true }
         );
     }
